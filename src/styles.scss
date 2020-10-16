@@ -1,0 +1,18 @@
+* {
+    font-family:'Times New Roman', Times, serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background: url('./assets/images/wallpaper.jpg');
+    background-size: 100vw 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    --orange: #e7b42a;
+    --white: #e5e5e7;
+    --blue: #91bada;
+    --green: #aec584;
+}
