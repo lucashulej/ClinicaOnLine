@@ -1,0 +1,125 @@
+* {
+    animation: fadeIn 1.5s;
+    outline: none;  
+    font-size: 1.5rem;
+}
+
+.cnt-registro {
+    width: 50vw;
+    height: 100vh;
+    background: var(--white);
+    border: 0px;
+    border-radius: 5%;
+    box-shadow: 0px 1px 6px 1px rgba(0,0,0,0.75);
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.cnt-select-registro {
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+span {
+    height: 50%;
+    width: 100%;
+    color: var(--blue);
+    text-align: center;
+    font-size: 2rem;
+}
+
+.select-alta {
+    height: 50%;
+    width: 100%;
+    color: var(--blue);
+    text-align: center;
+    font-size: 2rem;
+    border: 2px solid var(--orange);
+}
+
+.select-especialidad {
+    height: 100%;
+    width: 40%;
+    color: var(--blue);
+    text-align: center;
+    font-size: 1.5rem;
+    border: 2px solid var(--orange);
+}
+
+.cnt-registro-campos {
+    height: 6%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.cnt-registro-campos-files {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+input {
+    border: 0px;
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}
+
+input[type="file"] {
+    font-size: 1rem;
+    border: 0px;
+    width: 80%;
+    height: 100%;
+    text-align: center;
+    background: transparent;
+    color: var(--blue);
+}
+
+button {
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}
+
+button:hover {
+    border: 4px solid var(--orange);
+}
+
+button:active {
+    border: 4px solid var(--orange);
+    background: var(--orange);
+}
+
+.email-registro {
+    width: 60%;
+}
+
+.btn-registro-agregar {
+    width: 10%;
+    text-align: center;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}

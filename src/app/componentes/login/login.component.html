@@ -1,11 +1,11 @@
 <div class="cnt-login">
     <form>
-        <span class="lbl-title-login">LOGIN</span>
-        <input type="text" placeholder="Ingrese Correo" name="usuario" required>
-        <input type="password" placeholder="Ingrese Clave" name="clave" required>
+        <span>LOGIN</span>
+        <input type="text" placeholder="Ingrese Correo" [(ngModel)]="email" name="usuario" required>
+        <input type="password" placeholder="Ingrese Clave" [(ngModel)]="pass" name="clave" required>
         <div class="btn-cnt-login">
-        <button type="button" >Ingresar</button>
-        <button type="button" >Registrarse</button>
+        <button type="button" (click)="ingresar()">INGRESAR</button>
+        <button type="button" (click)="registrarse()">REGISTRARSE</button>
         </div>
     </form>
 </div>

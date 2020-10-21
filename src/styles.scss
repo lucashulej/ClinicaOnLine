@@ -1,6 +1,8 @@
 * {
-    font-family:'Times New Roman', Times, serif;
+    font-family:'coolvetica strong';
+    letter-spacing: 3px;
 }
+
 body{
     margin: 0;
     padding: 0;
@@ -13,6 +15,11 @@ body{
     height: 100vh;
     --orange: #e7b42a;
     --white: #e5e5e7;
-    --blue: #91bada;
+    --blue: #04b0c6;
     --green: #aec584;
+}
+
+@font-face{
+    font-family: 'coolvetica strong';
+    src: url('./assets/fonts/coolvetica\ condensed\ rg.ttf');
 }
