@@ -20,7 +20,7 @@
             <input type="email" name="email" [(ngModel)]="email" class="email-registro" placeholder="Correo Electronico" maxlength="25"/>
         </div>
         <div *ngIf="vistaRegistro != ''" class="cnt-registro-campos-files">
-            <input type="file" (change)="handleChangeFiles($event,1)" accept="*.png.jpg" name="foto1"/> <!-- (change)="handleChangeFiles($event)" -->
+            <input type="file" (change)="handleChangeFiles($event,1)" accept="*.png.jpg" name="foto1"/>
             <input type="file" (change)="handleChangeFiles($event,2)" accept="*.png.jpg" name="foto2"/>
         </div>
         <div *ngIf="vistaRegistro == 'Profesional'" class="cnt-registro-campos">
@@ -29,6 +29,10 @@
             <select name="selectEspecialidad" class="select-especialidad">
                 <option *ngFor="let especialidad of listaEspecialidades">{{especialidad}}</option>
             </select>
+        </div>
+        <div *ngIf="vistaRegistro != ''" class="cnt-registro-campos">
+            <img src="../../../assets/images/captcha.jpg">
+            <input type="text" placeholder="Captcha" class="inp-captcha" name="captcha" [(ngModel)]="captcha" maxlength="6"/>
         </div>
         <div class="cnt-registro-campos">
             <button type="button" (click)="salir()">Cancelar</button>

@@ -126,6 +126,15 @@ button:active {
     color: var(--blue);
 }
 
+.inp-captcha{
+    width: 20%;
+}
+
+img {
+    height: 100%;
+    width: 20%;
+}
+
 @-webkit-keyframes flip-in-hor-bottom {
     0% {
       -webkit-transform: rotateX(80deg);

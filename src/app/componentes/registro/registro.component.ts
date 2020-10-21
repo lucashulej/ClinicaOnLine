@@ -28,6 +28,7 @@ export class RegistroComponent implements OnInit {
   nombre:string;
   apellido:string;
   habilitado: boolean = false;
+  captcha:string;
 
   constructor(
     private routerService : RouterService, 
@@ -44,30 +45,37 @@ export class RegistroComponent implements OnInit {
     if(this.noExistenCamposNulos()) {
       if(this.esNombreApellidoValido(this.nombre.toLowerCase()) && this.esNombreApellidoValido(this.apellido.toLowerCase())) {
         if(this.pass1 == this.pass2) {
-          if(this.vistaRegistro == "Profesional") {
-            if(this.listaEspecialidades.length > 0) {
-              this.agregarUsuarioEnBd("Profesional");
-            } else {
-              this.toast.error("Debe tener almenos una especialidad");
+          if(this.captcha.toLowerCase() == "qjphjd") {
+            if(this.vistaRegistro == "Profesional") {
+              if(this.listaEspecialidades.length > 0) {
+                this.agregarUsuarioEnBd("Profesional");
+              } else {
+                this.toast.error("Debe tener almenos una especialidad");
+              }
+            } else { 
+              this.agregarUsuarioEnBd("Paciente");
             }
-          } else { 
-            this.agregarUsuarioEnBd("Paciente");
+          } else {
+            this.toast.error("Captcha Erroneo");
+            this.captcha = "";
           }
         } else {
           this.toast.error("Las Contraseñas no Coinciden");
+          this.pass1 = "";
+          this.pass2 = "";
         }
       } else {
         this.toast.error("Nombre o Contraseña invalidos");
       }
     } else {
-      this.toast.error("No puede dejar campos sin completar");
+      this.toast.error("No puede dejar campos sin Completar");
     }
   }
 
   agregarUsuarioEnBd(perfil:string) {
     this.authService.registrarse(this.email, this.pass1).then((response: any) => {
       this.subirFotos(response.user.uid);
-      if(perfil = "Profesional") {
+      if(perfil == "Profesional") {
         this.especialidadesService.actualizarEspecialidades(this.listaEspecialidades);
         this.usuarioSerive.nuevoProfesional(response.user.uid, this.nombre, this.apellido, this.email, this.pass1, this.fotoUno, this.fotoDos, this.listaEspecialidades);
       } else {
@@ -81,7 +89,7 @@ export class RegistroComponent implements OnInit {
   }
 
   noExistenCamposNulos(): boolean {
-    if(this.nombre != null && this.apellido != null && this.pass1 != null && this.pass2 != null && this.email != null) {
+    if(this.nombre != null && this.apellido != null && this.pass1 != null && this.pass2 != null && this.email != null && this.captcha != null) {
       return true;
     }
     return false;
