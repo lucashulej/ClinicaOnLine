@@ -4,6 +4,8 @@ import { RouterService } from '../../servicios/router.service';
 import { EspecialidadesService } from '../../servicios/especialidades.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ToastrService } from 'ngx-toastr';
+import { AngularFireStorage } from '@angular/fire/storage';
+
 
 @Component({
   selector: 'app-registro',
@@ -19,19 +21,21 @@ export class RegistroComponent implements OnInit {
   pass1:string;
   pass2:string;
   perfil:string
+  fotoUnoFile:string;
+  fotoDosFile:string;
   fotoUno:string;
   fotoDos:string;
   nombre:string;
   apellido:string;
   habilitado: boolean = false;
 
-
   constructor(
     private routerService : RouterService, 
     private authService : AuthService,
     private especialidadesService: EspecialidadesService, 
     private toast: ToastrService,
-    private usuarioSerive: UsuarioService
+    private usuarioSerive: UsuarioService,
+    private angularFireStorage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {}
@@ -42,31 +46,12 @@ export class RegistroComponent implements OnInit {
         if(this.pass1 == this.pass2) {
           if(this.vistaRegistro == "Profesional") {
             if(this.listaEspecialidades.length > 0) {
-              //
-              this.authService.registrarse(this.email, this.pass1).then((response: any) => {
-                this.especialidadesService.actualizarEspecialidades(this.listaEspecialidades);
-                this.usuarioSerive.nuevoProfesional(response.user.uid, this.nombre, this.apellido, this.email, this.pass1, "A", "B", this.listaEspecialidades);
-                this.authService.desloguearse();
-                this.limpiarForm();
-                this.cancelar();
-              },(error: any) => {
-                this.toast.error(error);
-              });
-              //
+              this.agregarUsuarioEnBd("Profesional");
             } else {
               this.toast.error("Debe tener almenos una especialidad");
             }
           } else { 
-             //
-             this.authService.registrarse(this.email, this.pass1).then((response: any) => {
-              this.usuarioSerive.nuevoPaciente(response.user.uid, this.nombre, this.apellido, this.email, this.pass1, "A", "B");
-              this.authService.desloguearse();
-              this.limpiarForm();
-              this.cancelar();
-            },(error: any) => {
-              this.toast.error(error);
-            });
-            //
+            this.agregarUsuarioEnBd("Paciente");
           }
         } else {
           this.toast.error("Las Contraseñas no Coinciden");
@@ -79,6 +64,22 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  agregarUsuarioEnBd(perfil:string) {
+    this.authService.registrarse(this.email, this.pass1).then((response: any) => {
+      this.subirFotos(response.user.uid);
+      if(perfil = "Profesional") {
+        this.especialidadesService.actualizarEspecialidades(this.listaEspecialidades);
+        this.usuarioSerive.nuevoProfesional(response.user.uid, this.nombre, this.apellido, this.email, this.pass1, this.fotoUno, this.fotoDos, this.listaEspecialidades);
+      } else {
+        this.usuarioSerive.nuevoPaciente(response.user.uid, this.nombre, this.apellido, this.email, this.pass1, this.fotoUno, this.fotoDos);
+      }
+      this.authService.desloguearse();
+      this.salir();
+    },(error: any) => {
+      this.toast.error(error);
+    });
+  }
+
   noExistenCamposNulos(): boolean {
     if(this.nombre != null && this.apellido != null && this.pass1 != null && this.pass2 != null && this.email != null) {
       return true;
@@ -86,7 +87,7 @@ export class RegistroComponent implements OnInit {
     return false;
   }
 
-  cancelar() {
+  salir() {
     this.routerService.navegar('/login');
   }
 
@@ -116,22 +117,28 @@ export class RegistroComponent implements OnInit {
     }
   }
 
-  limpiarForm() {
-    this.vistaRegistro = "";
-    this.nuevaEspecialidad = "";
-    this.listaEspecialidades = [];
-    this.email = "";
-    this.pass1 = "";
-    this.pass2 = "";
-    this.fotoUno = "";
-    this.fotoDos = "";
-    this.nombre = "";
-    this.apellido = "";
+  handleChangeFiles(e, numero) {
+    if(numero == 1) {
+      this.fotoUnoFile = e.target.files[0];
+      console.log(this.fotoUnoFile);
+    } else {
+      this.fotoDosFile = e.target.files[0];
+      console.log(this.fotoDosFile);
+    }
   }
 
-  subirFotos() { //TERMINAR USANDO STORAGE
-
+  subirFotos(id:string) { 
+    if(this.fotoUnoFile) {
+      this.fotoUno = `/usuarios/${id}/${1}`;
+      this.angularFireStorage.upload(this.fotoUno,this.fotoUnoFile);
+    } else {
+      this.fotoUno = `/usuarios/default.jpg`;
+    } 
+    if(this.fotoDosFile) {
+      this.fotoDos = `/usuarios/${id}/${2}`;
+      this.angularFireStorage.upload(this.fotoDos,this.fotoDosFile);
+    } else {
+      this.fotoDos = `/usuarios/default.jpg`;
+    }
   }
-
- 
 }

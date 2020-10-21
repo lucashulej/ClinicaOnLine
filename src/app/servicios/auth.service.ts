@@ -17,16 +17,19 @@ export class AuthService {
         console.log(error);
         switch(error.code) {
           case "auth/wrong-password":
-            reject("contrasena incorrecta");
+            reject("Contrasena Incorrecta");
             break;
           case "auth/user-not-found":
-            reject("usuario no encontrado");
+            reject("Usuario No Encontrado");
             break;
           case "auth/invalid-email":
-            reject("mail invalido");
+            reject("Mail Invalido");
             break;
           case "auth/wrong-password":
-            reject("contrasenia invalida");
+            reject("Contrasena Invalida");
+            break;
+          case "auth/argument-error":
+            reject("Campos Vacios");
             break;
           default:
             reject(error.code);
@@ -58,6 +61,9 @@ export class AuthService {
             break;
           case "auth/email-already-in-use":
             reject("Ta Exiiste una Cuenta con ese Mail");
+            break;
+          case "auth/argument-error":
+            reject("Campos Vacios");
             break;
           default:
             console.log(error.code);

@@ -20,8 +20,8 @@
             <input type="email" name="email" [(ngModel)]="email" class="email-registro" placeholder="Correo Electronico" maxlength="25"/>
         </div>
         <div *ngIf="vistaRegistro != ''" class="cnt-registro-campos-files">
-            <input type="file" (change)="handleChangeFiles($event)" name="foto1"/>
-            <input type="file" (change)="handleChangeFiles($event)" name="foto2"/>
+            <input type="file" (change)="handleChangeFiles($event,1)" accept="*.png.jpg" name="foto1"/> <!-- (change)="handleChangeFiles($event)" -->
+            <input type="file" (change)="handleChangeFiles($event,2)" accept="*.png.jpg" name="foto2"/>
         </div>
         <div *ngIf="vistaRegistro == 'Profesional'" class="cnt-registro-campos">
             <input type="text" placeholder="Agregue Especialidad" name="nuevaEspecialidad" [(ngModel)]="nuevaEspecialidad"/>
@@ -31,7 +31,7 @@
             </select>
         </div>
         <div class="cnt-registro-campos">
-            <button type="button" (click)="cancelar()">Cancelar</button>
+            <button type="button" (click)="salir()">Cancelar</button>
             <button *ngIf="vistaRegistro != ''" type="button" (click)="registrar()">Registrar</button>
         </div>
     </form>
