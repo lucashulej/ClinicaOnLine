@@ -34,4 +34,9 @@ export class LoginComponent implements OnInit {
   registrarse() {
     this.routerService.navegar('/registro');
   }
+
+  cargarUsuario() {
+    this.email = "lucashulej@gmail.com";
+    this.pass = "270699";
+  }
 }

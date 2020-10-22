@@ -45,7 +45,7 @@ export class RegistroComponent implements OnInit {
     if(this.noExistenCamposNulos()) {
       if(this.esNombreApellidoValido(this.nombre.toLowerCase()) && this.esNombreApellidoValido(this.apellido.toLowerCase())) {
         if(this.pass1 == this.pass2) {
-          if(this.captcha.toLowerCase() == "qjphjd") {
+          if(this.captcha.toLowerCase() == "qgphjd") {
             if(this.vistaRegistro == "Profesional") {
               if(this.listaEspecialidades.length > 0) {
                 this.agregarUsuarioEnBd("Profesional");
