@@ -19,10 +19,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   ingresar() {
+    //this.authService.desloguearse();
     this.authService.loguearse(this.email,this.pass).then((response:any) => {
       console.log(response);
       if(response.user.emailVerified) {
-        this.toast.success("Logueado");
+        this.routerService.navegar('/home');
       } else {
         this.toast.error("Habilite su Cuenta con el Correo de Verificacion");
       }

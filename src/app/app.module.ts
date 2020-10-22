@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { HomeComponent } from './componentes/home/home.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyC3GjrUEl1qTbX0FG4Ztf1y7V1ouGnaBLQ",
@@ -30,6 +31,7 @@ var firebaseConfig = {
     AppComponent,
     LoginComponent,
     RegistroComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

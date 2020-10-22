@@ -128,10 +128,8 @@ export class RegistroComponent implements OnInit {
   handleChangeFiles(e, numero) {
     if(numero == 1) {
       this.fotoUnoFile = e.target.files[0];
-      console.log(this.fotoUnoFile);
     } else {
       this.fotoDosFile = e.target.files[0];
-      console.log(this.fotoDosFile);
     }
   }
 
