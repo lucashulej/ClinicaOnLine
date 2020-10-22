@@ -6,7 +6,6 @@ import { UsuarioService } from '../../servicios/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -135,13 +134,13 @@ export class RegistroComponent implements OnInit {
 
   subirFotos(id:string) { 
     if(this.fotoUnoFile) {
-      this.fotoUno = `/usuarios/${id}/${1}`;
+      this.fotoUno = `/usuarios/${id}/1`;
       this.angularFireStorage.upload(this.fotoUno,this.fotoUnoFile);
     } else {
       this.fotoUno = `/usuarios/default.jpg`;
     } 
     if(this.fotoDosFile) {
-      this.fotoDos = `/usuarios/${id}/${2}`;
+      this.fotoDos = `/usuarios/${id}/2`;
       this.angularFireStorage.upload(this.fotoDos,this.fotoDosFile);
     } else {
       this.fotoDos = `/usuarios/default.jpg`;
