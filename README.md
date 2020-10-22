@@ -10,6 +10,9 @@ Podemos pedir turnos filtrando por especialidad, profesional o dia de la semana(
 Profesional: Comenzamos registrandonos y cargando nuestra info de usuario, junto con dos fotos las cuales puedan identificarnos, pero nuestro perfil debe ser aceptado por el administrador para comenzar a atender. Podremos cargar nuestros horarios al dia de la semana correspondiente y horario deseado.
 Tambien el profesional estara habilitado para gestionar los turnos: aceptando, cancelando o atendiendo estos segun corresponda(en caso de atenderlo, podemos cargar una encuesta de satisfaccion y dejar una reseña. En caso de cancelarlo se debe informar el motivo al usuario).
 
+# Probala 👨‍💻
+https://clinicaonlinelh.herokuapp.com/login
+
 # Construido con 🛠️
 Framework web utilizado: @angular/cli: 10.1.7 🅰️
 Base de datos NoSql: @firebase 🔥
