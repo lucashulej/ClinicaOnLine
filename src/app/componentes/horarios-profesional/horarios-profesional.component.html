@@ -1,0 +1,26 @@
+<div class="cnt-horarios-profesional">
+    <span>Seleccione Dias Laborales</span>
+    <div class="cnt-horarios-secundario-profesional">
+        <label><input type="checkbox" [(ngModel)]="diasLaborales['Lunes']">Lunes</label>
+        <label><input type="checkbox" [(ngModel)]="diasLaborales['Martes']">Martes</label>
+        <label><input type="checkbox" [(ngModel)]="diasLaborales['Miercoles']">Miercoles</label>
+        <label><input type="checkbox" [(ngModel)]="diasLaborales['Jueves']">Jueves</label>
+        <label><input type="checkbox" [(ngModel)]="diasLaborales['Viernes']">Viernes</label>
+        <label><input type="checkbox" [(ngModel)]="diasLaborales['Sabados']">Sabado</label>
+    </div>
+    <span>Franja Horaria</span>
+    <div class="cnt-horarios-terciario-profesional">
+        <label>Desde<input type="time" min="08:00" max="19:00" [(ngModel)]="desdeSemanal"></label>
+        <label>Duracion Turnos<input type="number" min="30" max="60" step="10" [(ngModel)]="duracion"></label>
+        <label>Hasta<input type="time" min="08:00" max="19:00" [(ngModel)]="hastaSemanal"></label>
+    </div>
+    <span *ngIf="diasLaborales['Sabados']">Franja Horaria Sabados</span>
+    <div *ngIf="diasLaborales['Sabados']" class="cnt-horarios-terciario-profesional">
+        <label>Desde<input type="time" min="08:00" max="19:00" [(ngModel)]="desdeSabados"></label>
+        <label>Hasta<input type="time" min="08:00" max="19:00" [(ngModel)]="hastaSabados"></label>
+    </div>
+    <div class="cnt-horarios-terciario-profesional">
+        <button type="button" (click)="salir()">Volver</button>
+        <button type="button" (click)="guardar()">Guardar</button>
+    </div>
+</div>

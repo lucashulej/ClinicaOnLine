@@ -3,6 +3,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { RouterService } from '../../servicios/router.service';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -16,13 +17,17 @@ export class HomeComponent implements OnInit {
   constructor(
     private angularFireStorage: AngularFireStorage,
     private routerService : RouterService, 
-    private authService : AuthService) { 
+    private authService : AuthService,
+    private usuariosService : UsuarioService) { 
+    
     /*
-    this.angularFireStorage.ref('/usuarios/7e0KuEYySEdtsby777QrpSxK1Eu1/1').getDownloadURL().subscribe((data:any) => {
+    this.angularFireStorage.ref('/usuarios/').getDownloadURL().subscribe((data:any) => {
       this.downloadURL = data;
       console.log(this.downloadURL);
     });
     */
+    //this.angularFireStorage.ref('/usuarios/').listAll().subscribe((imagenes) => console.log(imagenes));
+    
   }
 
   ngOnInit(): void {
@@ -33,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   volver() {
-    this.authService.desloguearse();
+   this.authService.desloguearse();
     this.routerService.navegar("/login");
   }
 }

@@ -1,0 +1,65 @@
+* {
+    outline: none;  
+    font-size: 1.5rem;
+}
+
+.cnt-horarios-profesional {
+    width: 50vw;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;  
+}
+
+.cnt-horarios-secundario-profesional {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.cnt-horarios-terciario-profesional {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+span {
+    font-size: 2rem;
+    color: var(--blue);
+}
+
+label {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+input[type="number"] {
+    width: 20%;
+}
+
+button {
+    width: 20%;
+    height: 60%;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}
+
+button:hover { 
+    border: 4px solid var(--orange);
+}
+
+button:active { 
+    border: 4px solid var(--orange);
+    background: var(--orange);
+}

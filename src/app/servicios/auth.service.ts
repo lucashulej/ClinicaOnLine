@@ -74,8 +74,8 @@ export class AuthService {
     });
   }
 
-  obtenerUsuario() {
-    return this.afAuth.currentUser;
+  async obtenerUsuario() {
+    return await this.afAuth.currentUser;
   }
 
   desloguearse() {

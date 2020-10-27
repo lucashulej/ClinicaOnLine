@@ -1,0 +1,35 @@
+<div class="cnt-pedir-turnos-paciente">
+    <div class="cnt-tablas-turnos">
+        <div class="cnt-tabla-turnos">
+            <table>
+                <tbody>
+                    <tr>
+                        Turnos Pendientes
+                    </tr>
+                    <tr>
+                        <td class="main-td">fecha</td>
+                        <td class="main-td">hora</td>
+                        <td class="main-td">paciente</td>
+                        <td class="main-td">especialidad</td>
+                        <td class="main-td">estado</td>
+                        <td class="main-td">aceptar</td>
+                        <td class="main-td">rechazar</td>
+                    </tr>
+                    <tr *ngFor="let turno of listaTurnosPendientes">
+                        <td>{{turno.fecha}}</td>
+                        <td>{{turno.hora}}</td>
+                        <td>{{turno.emailPaciente}}</td>
+                        <td>{{turno.especialidad}}</td>
+                        <td>{{turno.estado}}</td>
+                        <td><button class="btn-turnos-aceptar" (click)="aceptarTurno(turno.id)" type="button">aceptar</button></td>
+                        <td><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno.id)"type="button">rechazar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cnt-tabla-turnos">
+            
+        </div>
+    </div>
+    <button type="button" (click)="salir()">Volver</button>
+</div>

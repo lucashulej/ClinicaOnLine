@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { RouterService } from '../../servicios/router.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ToastrService } from 'ngx-toastr';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
   selector: 'app-login',
@@ -19,17 +20,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   ingresar() {
-    //this.authService.desloguearse();
     this.authService.loguearse(this.email,this.pass).then((response:any) => {
       console.log(response);
       if(response.user.emailVerified) {
-        this.routerService.navegar('/home');
+        this.usuarioSerive.obtenerTodosLosDatosDelUsuario().then((response:any) => {
+          if(response.perfil == "Profesional") {
+            this.routerService.navegar('/profesional');
+          } else {
+            this.routerService.navegar('/paciente');
+          }
+        }).catch((error:any) => console.log(error));
       } else {
         this.toast.error("Habilite su Cuenta con el Correo de Verificacion");
       }
-    }).catch((error:any) => {
-      this.toast.error(error);
-    });
+    }).catch((error:any) => this.toast.error(error));
+  
   }
 
   registrarse() {
@@ -38,6 +43,6 @@ export class LoginComponent implements OnInit {
 
   cargarUsuario() {
     this.email = "lucashulej@gmail.com";
-    this.pass = "270699";
+    this.pass = "123456";
   }
 }

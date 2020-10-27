@@ -15,6 +15,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
+import { ProfesionalComponent } from './componentes/profesional/profesional.component';
+import { PacienteComponent } from './componentes/paciente/paciente.component';
+import { HorariosProfesionalComponent } from './componentes/horarios-profesional/horarios-profesional.component';
+import { TurnosProfesionalComponent } from './componentes/turnos-profesional/turnos-profesional.component';
+import { PedirTurnosPacienteComponent } from './componentes/pedir-turnos-paciente/pedir-turnos-paciente.component';
+import { MisTurnosPacienteComponent } from './componentes/mis-turnos-paciente/mis-turnos-paciente.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyC3GjrUEl1qTbX0FG4Ztf1y7V1ouGnaBLQ",
@@ -32,6 +39,13 @@ var firebaseConfig = {
     LoginComponent,
     RegistroComponent,
     HomeComponent,
+    NavBarComponent,
+    ProfesionalComponent,
+    PacienteComponent,
+    HorariosProfesionalComponent,
+    TurnosProfesionalComponent,
+    PedirTurnosPacienteComponent,
+    MisTurnosPacienteComponent,
   ],
   imports: [
     BrowserModule,
