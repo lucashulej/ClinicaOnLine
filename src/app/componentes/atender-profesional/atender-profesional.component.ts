@@ -6,12 +6,13 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { Turno } from 'src/app/clases/turno';
 import { Usuario } from 'src/app/clases/usuario';
 
+
 @Component({
-  selector: 'app-mis-turnos-paciente',
-  templateUrl: './mis-turnos-paciente.component.html',
-  styleUrls: ['./mis-turnos-paciente.component.scss']
+  selector: 'app-atender-profesional',
+  templateUrl: './atender-profesional.component.html',
+  styleUrls: ['./atender-profesional.component.scss']
 })
-export class MisTurnosPacienteComponent implements OnInit {
+export class AtenderProfesionalComponent implements OnInit {
 
   @Output() cancelar: EventEmitter<any> = new EventEmitter();
   usaurios: Observable<any[]>;
@@ -20,7 +21,7 @@ export class MisTurnosPacienteComponent implements OnInit {
   listaTurnos: any[];
   turno: Turno = new Turno();
   miUsuario:Usuario;
-
+  
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     this.authService.obtenerUsuario().then((usuarioFire:any)=>{
       this.usaurios = this.db.list('usuarios').valueChanges(); 
@@ -52,9 +53,5 @@ export class MisTurnosPacienteComponent implements OnInit {
 
   salir() {
     this.cancelar.emit();
-  }
-
-  rechazarTurno(id:string) {
-    this.turnosService.cancelarTurno(id);
   }
 }

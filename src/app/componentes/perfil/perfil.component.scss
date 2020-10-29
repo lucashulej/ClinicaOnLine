@@ -3,8 +3,8 @@
     font-size: 1.5rem;
 }
 
-.cnt-profesional {
-    width: 50vw;
+.cnt-perfil {
+    width: 35vw;
     height: 75vh;
     background: var(--white);
     border: 0px;
@@ -16,7 +16,48 @@
     flex-direction: column;
 }
 
-.cnt-secundario-profesional {
+.cnt-fotos {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+img {
+    height: 100%;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--blue);
+}
+
+button {
+    width: 50%;
+    height: 8%;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+    font-size: 2rem;
+}
+
+button:hover {
+    border: 4px solid var(--orange);
+}
+
+button:active {
+    border: 4px solid var(--orange);
+    background: var(--orange);
+}
+
+
+
+
+
+/*
+.cnt-secundario-pacinete {
     width: 100%;
     height: 100%;
     display: flex;
@@ -47,3 +88,4 @@ h1 {
     font-size: 3rem;
     color: var(--blue);
 }
+*/

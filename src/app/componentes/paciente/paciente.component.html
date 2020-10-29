@@ -1,11 +1,12 @@
-<app-nav-bar [salir]="true"></app-nav-bar>
+<app-nav-bar [salir]="true" [perfil]="true"></app-nav-bar>
 <div class="cnt-pacinete">
     <div *ngIf="vistaPaciente == ''" class="cnt-secundario-pacinete">
+        <h1>PACIENTE</h1>
         <button type="button" class="btn-vista-registro" (click)="cambiarVistaPaciente('Pedir Turnos')">Pedir Turno</button>
         <button type="button" class="btn-vista-registro" (click)="cambiarVistaPaciente('Mis Turnos')">Mis Turnos</button>
     </div>
     <div *ngIf="vistaPaciente == 'Pedir Turnos' "class="cnt-secundario-pacinete">
-        <app-pedir-turnos-paciente (cancelar)="agarrarCancelar()"></app-pedir-turnos-paciente>
+        <app-pedir-turnos-paciente (error)="agarrarError($event)" (exito)="agarrarExito($event)" (cancelar)="agarrarCancelar()"></app-pedir-turnos-paciente>
     </div>
     <div *ngIf="vistaPaciente == 'Mis Turnos' "class="cnt-secundario-pacinete">
         <app-mis-turnos-paciente (cancelar)="agarrarCancelar()"></app-mis-turnos-paciente>

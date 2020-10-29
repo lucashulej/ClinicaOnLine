@@ -1,0 +1,11 @@
+<app-nav-bar [salir]="true"></app-nav-bar>
+<div class="cnt-perfil">
+    <div class="cnt-fotos">
+        <img [src]="fotoUno">
+        <img [src]="fotoDos">
+    </div>
+    <h1>{{usuario.perfil}}</h1>
+    <h1>{{usuario.nombre}}  {{usuario.apellido}}</h1>
+    <h1>{{usuario.email}}</h1>
+    <button type="button" (click)="volver()">Volver</button>
+</div>

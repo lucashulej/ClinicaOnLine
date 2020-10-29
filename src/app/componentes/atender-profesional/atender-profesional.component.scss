@@ -3,47 +3,57 @@
     font-size: 1.5rem;
 }
 
-.cnt-profesional {
+.cnt-atender-profesional {
     width: 50vw;
     height: 75vh;
     background: var(--white);
     border: 0px;
-    border-radius: 5%;
     box-shadow: 0px 1px 6px 1px rgba(0,0,0,0.75);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-}
-
-.cnt-secundario-profesional {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;  
 }
 
-.btn-vista-registro {
-    width: 50%;
-    height: 20%;
+.cnt-tabla-turnos {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;  
+    overflow-y: scroll;
+}
+
+table {
+    color: var(--blue);
+    text-align: center;
+}
+
+td {
+    position: relative;
+    width: 5%;
+    border: 1px solid var(--white);
+    font-size: 50%;
+}
+
+.main-td {
+    background-color: var(--orange);
+}
+
+.btn-volver {
+    width: 20%;
+    height: 10%;
     border: 2px solid var(--orange);
     background: transparent;
     color: var(--blue);
-    font-size: 2rem;
 }
 
-.btn-vista-registro:hover {
+.btn-volver:hover { 
     border: 4px solid var(--orange);
 }
 
-.btn-vista-registro:active {
+.btn-volver:active { 
     border: 4px solid var(--orange);
     background: var(--orange);
-}
-
-h1 {
-    font-size: 3rem;
-    color: var(--blue);
 }

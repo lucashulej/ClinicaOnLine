@@ -59,9 +59,9 @@ export class TurnosService {
     }
   }
 
-
   nuevoTurno(turno:Turno) {
     turno.id  = '_' + Math.random().toString(36).substr(2, 9); 
+    turno.estado = "Pendiente";
     this.db.list('turnos').set(turno.id, turno); 
   }
 

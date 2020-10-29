@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
 
   constructor(private authService : AuthService, private routerService : RouterService) {}
-
+  
   canActivate(): Observable<boolean> {
     return this.authService.afAuth.authState.pipe(
       map( user => {

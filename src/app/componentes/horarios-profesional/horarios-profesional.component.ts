@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Profesional } from 'src/app/clases/profesional';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { AuthService } from '../../servicios/auth.service';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-horarios-profesional',
@@ -21,16 +24,28 @@ export class HorariosProfesionalComponent implements OnInit {
   hastaSabados = "14:00";
   duracion = 30;
 
-  constructor(private usuarioService: UsuarioService) {
-    this.usuarioService.obtenerTodosLosDatosDelUsuario().then((usuario:any) => {
-      this.profesional = usuario;
-      this.diasLaborales =  this.profesional.diasLaborales;
-      this.desdeSemanal =  this.profesional.desdeSemanal;
-      this.hastaSemanal =  this.profesional.hastaSemanal;
-      this.desdeSabados =  this.profesional.desdeSabados;
-      this.hastaSabados =  this.profesional.hastaSabados;
-      this.duracion =  this.profesional.duracion;
-    }).catch((error:any) => console.log(error));
+  usuarios: Observable<any[]>;
+  listaUsuarios: any[];
+
+
+  constructor(private usuarioService: UsuarioService, private authService : AuthService, private db : AngularFireDatabase) {
+    this.authService.obtenerUsuario().then((usuarioFire:any) => {
+      this.usuarios = this.db.list('usuarios').valueChanges(); 
+      this.usuarios.subscribe(usuarios => {
+        this.listaUsuarios = usuarios;
+        for (const usuario of this.listaUsuarios) {
+          if(usuario.id == usuarioFire.uid) {
+            this.profesional = usuario;
+            this.diasLaborales =  this.profesional.diasLaborales;
+            this.desdeSemanal =  this.profesional.desdeSemanal;
+            this.hastaSemanal =  this.profesional.hastaSemanal;
+            this.desdeSabados =  this.profesional.desdeSabados;
+            this.hastaSabados =  this.profesional.hastaSabados;
+            this.duracion =  this.profesional.duracion;
+          }
+        }
+      }, error => console.log(error));
+    }).catch((error:any) => console.log(error))
   }
 
   ngOnInit(): void {}
