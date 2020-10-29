@@ -1,6 +1,6 @@
 export class Turno {
     id:string;
-    idProfesinal:string;
+    idProfesional:string;
     fecha;
     horario:string;
     estado:string;

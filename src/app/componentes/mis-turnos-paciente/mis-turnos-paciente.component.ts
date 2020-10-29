@@ -40,9 +40,6 @@ export class MisTurnosPacienteComponent implements OnInit {
               return turno;
             }
           });
-          for (let index = 0; index < 20; index++) {
-            this.listaTurnos.push(this.listaTurnos[index]);
-          }
         }, error => console.log(error));
       }, error => console.log(error));
     }).catch((error:any)=>console.log(error));

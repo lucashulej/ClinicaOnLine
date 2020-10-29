@@ -18,10 +18,6 @@
 .cnt-tabla-turnos {
     width: 100%;
     height: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;  
     overflow-y: scroll;
 }
 
@@ -39,6 +35,11 @@ td {
 
 .main-td {
     background-color: var(--orange);
+}
+
+.btn-turnos-atender {
+    border: 0px;
+    background: green;
 }
 
 .btn-volver {

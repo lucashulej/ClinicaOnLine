@@ -23,7 +23,7 @@ export class TurnosProfesionalComponent implements OnInit {
     this.turnos.subscribe(turnos => {
       this.listaTurnos = turnos;
       this.usuarioService.obtenerTodosLosDatosDelUsuario().then((usuario:any) => {
-        this.listaTurnos = this.listaTurnos.filter(turno => turno.idProfesinal == usuario.id);
+        this.listaTurnos = this.listaTurnos.filter(turno => turno.idProfesional == usuario.id);
         this.listaTurnosPendientes = this.listaTurnos.filter(turno => turno.estado == "Pendiente");
         this.listaTurnosAceptados = this.listaTurnos.filter(turno => turno.estado == "Aceptado");
         console.log(this.listaTurnos);

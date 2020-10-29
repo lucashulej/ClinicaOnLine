@@ -21,7 +21,7 @@ export class AtenderProfesionalComponent implements OnInit {
   listaTurnos: any[];
   turno: Turno = new Turno();
   miUsuario:Usuario;
-  
+  hoy: Date = new Date();
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     this.authService.obtenerUsuario().then((usuarioFire:any)=>{
       this.usaurios = this.db.list('usuarios').valueChanges(); 
@@ -37,19 +37,21 @@ export class AtenderProfesionalComponent implements OnInit {
         this.turnos.subscribe(turnos => {
           this.listaTurnos = turnos;
           this.listaTurnos = this.listaTurnos.filter(turno => {
-            if(turno.emailPaciente == this.miUsuario.email && turno.estado == "Pendiente") {
+            if(turno.idProfesional == this.miUsuario.id && turno.estado == "Aceptado") {
               return turno;
             }
           });
-          for (let index = 0; index < 20; index++) {
-            this.listaTurnos.push(this.listaTurnos[index]);
-          }
         }, error => console.log(error));
       }, error => console.log(error));
     }).catch((error:any)=>console.log(error));
   }
 
   ngOnInit(): void {}
+
+  atenderTurno(turno) {
+    turno.estado ="Atendido";
+    this.turnosService.actualizarTurno(turno);
+  }
 
   salir() {
     this.cancelar.emit();

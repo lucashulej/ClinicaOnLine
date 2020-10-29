@@ -248,7 +248,7 @@ export class PedirTurnosPacienteComponent implements OnInit {
 
   crearTurno() {
     let turno = new Turno();
-    turno.idProfesinal = this.profesionalSeleccionado.id;
+    turno.idProfesional = this.profesionalSeleccionado.id;
     turno.emailPaciente = this.miUsuario.email;
     turno.especialidad = this.especialidadSeleccionada;
     turno.fecha = this.fechaSeleccionada;

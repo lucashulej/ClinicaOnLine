@@ -30,11 +30,9 @@ export class PerfilComponent implements OnInit {
           if(usuario.id == usuarioFire.uid) {
             this.usuario = usuario;
             this.angularFireStorage.ref(usuario.fotoUno).getDownloadURL().subscribe((data:any) => {
-              console.log(data);
               this.fotoUno = data;
             });
             this.angularFireStorage.ref(usuario.fotoDos).getDownloadURL().subscribe((data:any) => {
-              console.log(data);
               this.fotoDos = data;
             });
             break;
