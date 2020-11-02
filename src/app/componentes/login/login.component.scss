@@ -23,11 +23,9 @@ form {
     flex-direction: column;
 }
 
-span {
-    width: 100%;
-    color: var(--blue);
-    text-align: center;
-    font-size: 2rem;
+h1 {
+        font-size: 3rem;
+        color: var(--blue);
 }
 
 .btn-cnt-login {

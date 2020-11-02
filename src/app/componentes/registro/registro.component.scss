@@ -31,14 +31,6 @@ form {
     flex-direction: column;
 }
 
-span {
-    height: 50%;
-    width: 100%;
-    color: var(--blue);
-    text-align: center;
-    font-size: 2rem;
-}
-
 .select-alta {
     height: 50%;
     width: 100%;
@@ -132,6 +124,11 @@ button:active {
 img {
     height: 100%;
     width: 20%;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--blue);
 }
 
 @-webkit-keyframes flip-in-hor-bottom {

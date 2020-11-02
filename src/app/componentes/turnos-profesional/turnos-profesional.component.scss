@@ -17,7 +17,7 @@
 
 .cnt-tablas-turnos {
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -64,7 +64,7 @@ td {
 
 button {
     width: 20%;
-    height: 8%;
+    height: 10%;
     border: 2px solid var(--orange);
     background: transparent;
     color: var(--blue);
