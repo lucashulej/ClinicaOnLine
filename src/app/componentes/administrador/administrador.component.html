@@ -1,0 +1,14 @@
+<app-nav-bar [salir]="true"></app-nav-bar>
+<div class="cnt-administrador">
+    <div *ngIf="vistaAdministrador == ''" class="cnt-secundario-administrador">
+        <h1>ADMINISTRADOR</h1>
+        <button type="button" class="btn-vista-administrador" (click)="cambiarVistaAdministrador('Aceptar Profesional')">Aceptar Profesionales</button>
+        <button type="button" class="btn-vista-administrador" (click)="cambiarVistaAdministrador('Alta Administrador')">Alta Administrador</button>
+    </div>
+    <div *ngIf="vistaAdministrador == 'Aceptar Profesional'" class="cnt-secundario-administrador">
+        <app-aceptar-profesional [listaProfesionalesNoHabilitados]="listaProfesionalesNoHabilitados" (exito)="agarrarExito($event)" (cancelar)="agarrarCancelar()"></app-aceptar-profesional>
+    </div>
+    <div *ngIf="vistaAdministrador == 'Alta Administrador'" class="cnt-secundario-administrador">
+        <app-alta-administrador [miAdministrador]="miAdministrador" (error)="agarrarError($event)" (exito)="agarrarExito($event)" (cancelar)="agarrarCancelar()"></app-alta-administrador>
+    </div>
+</div>

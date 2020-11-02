@@ -1,0 +1,58 @@
+* {
+    outline: none;  
+    font-size: 1.5rem;
+}
+
+.cnt-aceptar-profesional {
+    width: 50vw;
+    height: 75vh;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.cnt-tabla-aceptar-profesional {
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+}
+
+table {
+    color: var(--blue);
+    text-align: center;
+}
+
+td {
+    position: relative;
+    width: 5%;
+    border: 1px solid var(--white);
+    font-size: 50%;
+}
+
+.main-td {
+    background-color: var(--orange);
+}
+
+.btn-aceptar-profesional{
+    border: 0px;
+    background: green;
+}
+
+.btn-volver {
+    width: 20%;
+    height: 10%;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}
+
+.btn-volver:hover { 
+    border: 4px solid var(--orange);
+}
+
+.btn-volver:active { 
+    border: 4px solid var(--orange);
+    background: var(--orange);
+}

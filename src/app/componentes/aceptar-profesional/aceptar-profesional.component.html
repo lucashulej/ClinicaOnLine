@@ -1,0 +1,21 @@
+<div class="cnt-aceptar-profesional">
+    <div class="cnt-tabla-aceptar-profesional">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="main-td">Nombre</td>
+                    <td class="main-td">Apellido</td>
+                    <td class="main-td">Email</td>
+                    <td class="main-td">Habilitar</td>
+                </tr>
+                <tr *ngFor="let profesional of listaProfesionalesNoHabilitados">
+                    <td>{{profesional.nombre}}</td>
+                    <td>{{profesional.apellido}}</td>
+                    <td>{{profesional.email}}</td>
+                    <td><button class="btn-aceptar-profesional" (click)="habilitarProfesional(profesional)" type="button">HABILITAR</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn-volver" (click)="salir()">Volver</button> 
+</div>

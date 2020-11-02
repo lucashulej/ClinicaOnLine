@@ -22,6 +22,7 @@ export class AtenderProfesionalComponent implements OnInit {
   turno: Turno = new Turno();
   miUsuario:Usuario;
   hoy: Date = new Date();
+  
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     this.authService.obtenerUsuario().then((usuarioFire:any)=>{
       this.usaurios = this.db.list('usuarios').valueChanges(); 

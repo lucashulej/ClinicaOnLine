@@ -23,6 +23,10 @@ import { PedirTurnosPacienteComponent } from './componentes/pedir-turnos-pacient
 import { MisTurnosPacienteComponent } from './componentes/mis-turnos-paciente/mis-turnos-paciente.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { AtenderProfesionalComponent } from './componentes/atender-profesional/atender-profesional.component';
+import { AltaAdministradorComponent } from './componentes/alta-administrador/alta-administrador.component';
+import { AdministradorComponent } from './componentes/administrador/administrador.component';
+import { AceptarProfesionalComponent } from './componentes/aceptar-profesional/aceptar-profesional.component';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyC3GjrUEl1qTbX0FG4Ztf1y7V1ouGnaBLQ",
@@ -48,6 +52,9 @@ var firebaseConfig = {
     MisTurnosPacienteComponent,
     PerfilComponent,
     AtenderProfesionalComponent,
+    AltaAdministradorComponent,
+    AdministradorComponent,
+    AceptarProfesionalComponent
   ],
   imports: [
     BrowserModule,

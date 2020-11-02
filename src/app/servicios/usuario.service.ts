@@ -4,15 +4,14 @@ import { Observable } from 'rxjs';
 import { Usuario } from '../clases/usuario';
 import { Profesional } from '../clases/profesional';
 import { AuthService } from './auth.service';
+import { Administrador } from '../clases/administrador';
+import { EmitAndSemanticDiagnosticsBuilderProgram } from 'typescript';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  usuario: Usuario;
-  profesional: Profesional;
-  
   usuarios: Observable<any[]>;
   listaUsuarios: any[];
 
@@ -22,37 +21,47 @@ export class UsuarioService {
   }
 
   nuevoProfesional(id:string, nombre:string, apellido:string, email:string, pass:string, fotoUno:string, fotoDos:string, especialidades) {
-    this.profesional = new Profesional();
-    this.profesional.habilitado = false;
-    this.profesional.perfil = "Profesional";
-    this.profesional.id = id;
-    this.profesional.nombre = nombre;
-    this.profesional.apellido = apellido;
-    this.profesional.email = email;
-    this.profesional.pass = pass;
-    this.profesional.fotoUno = fotoUno;
-    this.profesional.fotoDos = fotoDos;
-    this.profesional.especialidades = especialidades;
-    this.profesional.diasLaborales = {"Lunes" : true , "Martes" : true , "Miercoles" : true , "Jueves" : true , "Viernes" : true , "Sabados" : true};
-    this.profesional.desdeSemanal = "08:00";
-    this.profesional.hastaSemanal = "19:00";
-    this.profesional.desdeSabados = "08:00";
-    this.profesional.hastaSabados = "14:00";
-    this.profesional.duracion = 30;
-    this.db.list('usuarios').set(id, this.profesional);
+    let profesional = new Profesional();
+    profesional.perfil = "Profesional";
+    profesional.habilitado = false;
+    profesional.id = id;
+    profesional.nombre = nombre;
+    profesional.apellido = apellido;
+    profesional.email = email;
+    profesional.pass = pass;
+    profesional.fotoUno = fotoUno;
+    profesional.fotoDos = fotoDos;
+    profesional.especialidades = especialidades;
+    profesional.diasLaborales = {"Lunes" : true , "Martes" : true , "Miercoles" : true , "Jueves" : true , "Viernes" : true , "Sabados" : true};
+    profesional.desdeSemanal = "08:00";
+    profesional.hastaSemanal = "19:00";
+    profesional.desdeSabados = "08:00";
+    profesional.hastaSabados = "14:00";
+    profesional.duracion = 30;
+    this.db.list('usuarios').set(id, profesional);
   }
 
   nuevoPaciente(id:string, nombre:string, apellido:string, email:string, pass:string, fotoUno:string, fotoDos:string) {
-    this.usuario = new Usuario();
-    this.usuario.perfil = "Paciente";
-    this.usuario.id = id;
-    this.usuario.nombre = nombre;
-    this.usuario.apellido = apellido;
-    this.usuario.email = email;
-    this.usuario.pass = pass;
-    this.usuario.fotoUno = fotoUno;
-    this.usuario.fotoDos = fotoDos;
-    this.db.list('usuarios').set(id, this.usuario);
+    let usuario = new Usuario();
+    usuario.perfil = "Paciente";
+    usuario.id = id;
+    usuario.nombre = nombre;
+    usuario.apellido = apellido;
+    usuario.email = email;
+    usuario.pass = pass;
+    usuario.fotoUno = fotoUno;
+    usuario.fotoDos = fotoDos;
+    this.db.list('usuarios').set(id, usuario);
+  }
+
+  nuevoAdministrador(id:string, email:string, pass:string) {
+    let administrador = new Administrador();
+    administrador.perfil = "Administrador";
+    administrador.habilitado = false;
+    administrador.id = id;
+    administrador.email = email;
+    administrador.pass = pass;
+    this.db.list('usuarios').set(id, administrador);
   }
 
   async obtenerTodosLosDatosDelUsuario() {

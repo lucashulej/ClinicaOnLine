@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { RouterService } from '../../servicios/router.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ToastrService } from 'ngx-toastr';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +24,15 @@ export class LoginComponent implements OnInit {
       if(response.user.emailVerified) {
         this.usuarioSerive.obtenerTodosLosDatosDelUsuario().then((response:any) => {
           if(response.perfil == "Profesional") {
-            this.routerService.navegar('/profesional');
-          } else {
+            if(response.habilitado) {
+              this.routerService.navegar('/profesional');
+            } else {
+              this.toast.error("Solicite a un administrador que lo habilite");
+            }
+          }else if(response.perfil == "Administrador") {
+            this.routerService.navegar('/administrador');
+          } 
+          else {
             this.routerService.navegar('/paciente');
           }
         }).catch((error:any) => console.log(error));
@@ -34,7 +40,6 @@ export class LoginComponent implements OnInit {
         this.toast.error("Habilite su Cuenta con el Correo de Verificacion");
       }
     }).catch((error:any) => this.toast.error(error));
-  
   }
 
   registrarse() {

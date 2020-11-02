@@ -64,7 +64,7 @@ export class RegistroComponent implements OnInit {
           this.pass2 = "";
         }
       } else {
-        this.toast.error("Nombre o Contraseña invalidos");
+        this.toast.error("Nombre o Apellido invalidos");
       }
     } else {
       this.toast.error("No puede dejar campos sin Completar");

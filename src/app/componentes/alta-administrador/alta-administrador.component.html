@@ -1,0 +1,10 @@
+<div class="cnt-alta-administrador">
+    <span>ALTA ADMINISTADOR</span>
+    <input type="email" name="email" [(ngModel)]="email" class="email-registro" placeholder="Correo Electronico" maxlength="40"/>
+    <input type="password" name="pass1" [(ngModel)]="pass1" placeholder="Contraseña" maxlength="6"/>
+    <input type="password" name="pass2" [(ngModel)]="pass2" placeholder="Repita Contraseña" maxlength="6"/>
+    <div class="cnt-alta-administrador-btns">
+        <button type="button" (click)="salir()">Cancelar</button>
+        <button type="button" (click)="registrar()">Registrar</button>
+    </div>
+</div>
