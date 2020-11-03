@@ -1,17 +1,17 @@
 <div class="cnt-atender-profesional">
-    <div class="cnt-tabla-atender-profesional">
+    <div *ngIf="vistaAtenderPaciente == 'Turnos'" class="cnt-tabla-atender-profesional">
         <table>
             <tbody>
                 <tr>
                     Turnos Recibidos
                 </tr>
                 <tr>
-                    <td class="main-td">fecha</td>
-                    <td class="main-td">hora</td>
-                    <td class="main-td">paciente</td>
-                    <td class="main-td">especialidad</td>
-                    <td class="main-td">estado</td>
-                    <td class="main-td">atender</td>
+                    <td class="main-td">FECHA</td>
+                    <td class="main-td">HORA</td>
+                    <td class="main-td">PACIENTE</td>
+                    <td class="main-td">ESPECIALIDADES</td>
+                    <td class="main-td">ESTADO</td>
+                    <td class="main-td">ATENDER</td>
                 </tr>
                 <tr *ngFor="let turno of listaTurnos">
                     <td>{{turno.fecha}}</td>
@@ -24,5 +24,6 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn-volver" (click)="salir()">Volver</button> 
+    <button *ngIf="vistaAtenderPaciente == 'Turnos'" type="button" class="btn-volver" (click)="salir()">Volver</button> 
+    <app-encuesta-profesional [turno]="turno" (turnoAtendido)="subirTurnoAtendido($event)" (cancelar)="cambiarVista()" (error)="agarrarError($event)" *ngIf="vistaAtenderPaciente == 'Encuesta'"></app-encuesta-profesional>
 </div>

@@ -1,0 +1,32 @@
+<div class="cnt-encuesta-profesional">
+    <div class="cnt-input-encuesta-profesional">
+        <span>EDAD</span>
+        <input type="number" [(ngModel)]="turno.edad" step="1" min="0" max="100"/>
+    </div>
+    <div class="cnt-input-encuesta-profesional">
+        <span>TEMPERATURA</span>
+        <input type="number" [(ngModel)]="turno.temperatura" step="0.1" min="36.0" max="39.5"/>
+    </div>
+    <div class="cnt-input-encuesta-profesional">
+        <span>PRESION</span>
+        <input type="number" [(ngModel)]="turno.presion" step="1" min="80" max="129"/>
+    </div>
+    <div *ngIf="cantidadCamposExtras >= 1" class="cnt-input-encuesta-profesional">
+        <input type="text" [(ngModel)]="turno.claveCampo1" placeholder="clave"/>
+        <input type="text" [(ngModel)]="turno.valorCampo1" placeholder="valor"/>
+    </div>
+    <div *ngIf="cantidadCamposExtras >= 2" class="cnt-input-encuesta-profesional">
+        <input type="text" [(ngModel)]="turno.claveCampo2" placeholder="clave"/>
+        <input type="text" [(ngModel)]="turno.valorCampo2" placeholder="valor"/>
+    </div>
+    <div *ngIf="cantidadCamposExtras >= 3" class="cnt-input-encuesta-profesional">
+        <input type="text" [(ngModel)]="turno.claveCampo3" placeholder="clave"/>
+        <input type="text" [(ngModel)]="turno.valorCampo3" placeholder="valor"/>
+    </div>
+    <textarea name="mensaje" [(ngModel)]="turno.reseniaProfesional" placeholder="Reseña sobre el Paciente"></textarea>
+    <button *ngIf="cantidadCamposExtras < 3" type="button" class="btn-agregar-campo" (click)="agregarCampo()">+</button>
+    <div class="cnt-input-encuesta-profesional">
+        <button type="button" (click)="salir()">Cancelar</button>
+        <button type="button" (click)="guardarEncuesta()">Guardar Encuensta</button>
+    </div>
+</div>

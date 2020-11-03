@@ -13,6 +13,6 @@
         <app-turnos-profesional (cancelar)="agarrarCancelar()"></app-turnos-profesional>
     </div>
     <div *ngIf="vistaProfesional == 'Atender' "class="cnt-secundario-profesional">
-        <app-atender-profesional (cancelar)="agarrarCancelar()"></app-atender-profesional>
+        <app-atender-profesional (error)="agarrarError($event)" (exito)="agarrarExito($event)" (cancelar)="agarrarCancelar()"></app-atender-profesional>
     </div>
 </div>

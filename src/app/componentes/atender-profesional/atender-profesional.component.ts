@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { Turno } from 'src/app/clases/turno';
 import { Usuario } from 'src/app/clases/usuario';
 
-
 @Component({
   selector: 'app-atender-profesional',
   templateUrl: './atender-profesional.component.html',
@@ -14,7 +13,10 @@ import { Usuario } from 'src/app/clases/usuario';
 })
 export class AtenderProfesionalComponent implements OnInit {
 
+  @Output() exito: EventEmitter<any> = new EventEmitter();
   @Output() cancelar: EventEmitter<any> = new EventEmitter();
+  @Output() error: EventEmitter<any> = new EventEmitter();
+
   usaurios: Observable<any[]>;
   listaUsuarios: any[];
   turnos: Observable<any[]>;
@@ -22,7 +24,8 @@ export class AtenderProfesionalComponent implements OnInit {
   turno: Turno = new Turno();
   miUsuario:Usuario;
   hoy: Date = new Date();
-  
+  vistaAtenderPaciente = "Turnos";
+
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     this.authService.obtenerUsuario().then((usuarioFire:any)=>{
       this.usaurios = this.db.list('usuarios').valueChanges(); 
@@ -49,12 +52,26 @@ export class AtenderProfesionalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  atenderTurno(turno) {
-    turno.estado ="Atendido";
-    this.turnosService.actualizarTurno(turno);
+  atenderTurno(turno:Turno) {
+    this.turno = turno;
+    this.vistaAtenderPaciente = "Encuesta"
   }
 
   salir() {
     this.cancelar.emit();
+  }
+
+  cambiarVista() {
+    this.vistaAtenderPaciente = "Turnos";
+  }
+
+  agarrarError(error:string) {
+    this.error.emit(error);
+  }
+
+  subirTurnoAtendido(turno:Turno) {
+    this.turnosService.actualizarTurno(turno);
+    this.cambiarVista();
+    this.exito.emit("Turno Atendido");
   }
 }

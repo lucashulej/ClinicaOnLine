@@ -26,6 +26,8 @@ import { AtenderProfesionalComponent } from './componentes/atender-profesional/a
 import { AltaAdministradorComponent } from './componentes/alta-administrador/alta-administrador.component';
 import { AdministradorComponent } from './componentes/administrador/administrador.component';
 import { AceptarProfesionalComponent } from './componentes/aceptar-profesional/aceptar-profesional.component';
+import { EncuestaProfesionalComponent } from './componentes/encuesta-profesional/encuesta-profesional.component';
+import { EncuestaPacienteComponent } from './componentes/encuesta-paciente/encuesta-paciente.component';
 
 
 var firebaseConfig = {
@@ -54,7 +56,9 @@ var firebaseConfig = {
     AtenderProfesionalComponent,
     AltaAdministradorComponent,
     AdministradorComponent,
-    AceptarProfesionalComponent
+    AceptarProfesionalComponent,
+    EncuestaProfesionalComponent,
+    EncuestaPacienteComponent
   ],
   imports: [
     BrowserModule,
