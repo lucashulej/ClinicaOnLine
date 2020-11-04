@@ -1,10 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { TurnosService } from 'src/app/servicios/turnos.service';
-import { Observable } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AuthService } from 'src/app/servicios/auth.service';
 import { Turno } from 'src/app/clases/turno';
-import { Usuario } from 'src/app/clases/usuario';
 
 @Component({
   selector: 'app-encuesta-profesional',
@@ -18,21 +13,7 @@ export class EncuestaProfesionalComponent implements OnInit {
   @Output() cancelar: EventEmitter<any> = new EventEmitter();
   @Output() error: EventEmitter<any> = new EventEmitter();
 
-  //edad:number = 0;
-  //temperatura:number = 37.5;
-  //presion:number = 100;
-  //resenia:string = "";
-
   cantidadCamposExtras:number = 0;
-
-  /*
-  claveCampo1:string = "";
-  valorCampo1:string = "";
-  claveCampo2:string = "";
-  valorCampo2:string = "";
-  claveCampo3:string = "";
-  valorCampo3:string = "";
-  */
 
   constructor() {}
 

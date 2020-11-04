@@ -1,0 +1,50 @@
+* {
+    outline: none;  
+    font-size: 1.5rem;
+}
+
+.cnt-encuesta-paciente {
+    width: 50vw;
+    height: 75vh;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;  
+}
+
+.cnt-input-encuesta-paciente {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;  
+}
+
+button {
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}
+
+button:hover {
+    border: 4px solid var(--orange);
+}
+
+button:active {
+    border: 4px solid var(--orange);
+    background: var(--orange);
+}
+
+textarea {
+    width: 90%;
+    height: 20%;
+    text-align: center;
+    border: 2px solid var(--orange);
+    background: transparent;
+    color: var(--blue);
+}

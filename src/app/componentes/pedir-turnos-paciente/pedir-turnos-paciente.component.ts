@@ -43,6 +43,9 @@ export class PedirTurnosPacienteComponent implements OnInit {
   horarioSeleccionado = "";
   especialidadSeleccionada = "";
 
+  fechaMin = "2020-05-01";
+  fechaMax = "2020-11-15";
+
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     
     this.fechaSeleccionada = new Date();

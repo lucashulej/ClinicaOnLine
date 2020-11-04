@@ -9,6 +9,6 @@
         <app-pedir-turnos-paciente (error)="agarrarError($event)" (exito)="agarrarExito($event)" (cancelar)="agarrarCancelar()"></app-pedir-turnos-paciente>
     </div>
     <div *ngIf="vistaPaciente == 'Mis Turnos' "class="cnt-secundario-pacinete">
-        <app-mis-turnos-paciente (cancelar)="agarrarCancelar()"></app-mis-turnos-paciente>
+        <app-mis-turnos-paciente (error)="agarrarError($event)" (exito)="agarrarExito($event)" (cancelar)="agarrarCancelar()"></app-mis-turnos-paciente>
     </div>
 </div>

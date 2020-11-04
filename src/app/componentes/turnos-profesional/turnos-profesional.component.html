@@ -21,8 +21,8 @@
                         <td>{{turno.emailPaciente}}</td>
                         <td>{{turno.especialidad}}</td>
                         <td>{{turno.estado}}</td>
-                        <td><button class="btn-turnos-aceptar" (click)="aceptarTurno(turno.id)" type="button">aceptar</button></td>
-                        <td><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno.id)"type="button">rechazar</button></td>
+                        <td><button class="btn-turnos-aceptar" (click)="aceptarTurno(turno)" type="button">aceptar</button></td>
+                        <td><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno)"type="button">rechazar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -47,7 +47,7 @@
                         <td>{{turno.emailPaciente}}</td>
                         <td>{{turno.especialidad}}</td>
                         <td>{{turno.estado}}</td>
-                        <td><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno.id)" type="button">rechazar</button></td>
+                        <td><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno)" type="button">rechazar</button></td>
                     </tr>
                 </tbody>
             </table>

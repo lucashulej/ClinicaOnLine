@@ -1,17 +1,17 @@
 <div class="cnt-turnos-mis-turnos">
-    <div class="cnt-tabla-turnos">
+    <div *ngIf="vistaMisTurnos == 'Turnos'" class="cnt-tabla-turnos">
         <table>
             <tbody>
                 <tr>
                     Mis Turnos
                 </tr>
                 <tr>
-                    <td class="main-td">fecha</td>
-                    <td class="main-td">hora</td>
-                    <td class="main-td">paciente</td>
-                    <td class="main-td">especialidad</td>
-                    <td class="main-td">estado</td>
-                    <td class="main-td">rechazar</td>
+                    <td class="main-td">Fecha</td>
+                    <td class="main-td">Hora</td>
+                    <td class="main-td">Paciente</td>
+                    <td class="main-td">Especialidad</td>
+                    <td class="main-td">Estado</td>
+                    <td class="main-td">Accion</td>
                 </tr>
                 <tr *ngFor="let turno of listaTurnos">
                     <td>{{turno.fecha}}</td>
@@ -19,10 +19,12 @@
                     <td>{{turno.emailPaciente}}</td>
                     <td>{{turno.especialidad}}</td>
                     <td>{{turno.estado}}</td>
-                    <td><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno.id)" type="button">rechazar</button></td>
+                    <td *ngIf="turno.estado == 'Pendiente'"><button class="btn-turnos-rechazar" (click)="rechazarTurno(turno)" type="button">rechazar</button></td>
+                    <td *ngIf="turno.estado == 'Atendido' && !turno.reseniaPaciente"><button class="btn-turnos-encuesta" (click)="encuestaTurno(turno)" type="button">Encuesta</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <button type="button" (click)="salir()">Volver</button>
+    <button *ngIf="vistaMisTurnos == 'Turnos'" type="button" (click)="salir()">Volver</button>
+    <app-encuesta-paciente [turno]="turno" (turnoConResenia)="subirTurnoConResenia($event)" (cancelar)="cambiarVista()" (error)="agarrarError($event)" *ngIf="vistaMisTurnos == 'Encuesta'"></app-encuesta-paciente>
 </div>

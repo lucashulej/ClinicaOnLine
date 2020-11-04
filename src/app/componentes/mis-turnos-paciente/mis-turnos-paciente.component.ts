@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Turno } from 'src/app/clases/turno';
 import { Usuario } from 'src/app/clases/usuario';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-mis-turnos-paciente',
@@ -13,13 +14,17 @@ import { Usuario } from 'src/app/clases/usuario';
 })
 export class MisTurnosPacienteComponent implements OnInit {
 
+  @Output() exito: EventEmitter<any> = new EventEmitter();
   @Output() cancelar: EventEmitter<any> = new EventEmitter();
+  @Output() error: EventEmitter<any> = new EventEmitter();
+
   usaurios: Observable<any[]>;
   listaUsuarios: any[];
   turnos: Observable<any[]>;
   listaTurnos: any[];
   turno: Turno = new Turno();
   miUsuario:Usuario;
+  vistaMisTurnos = "Turnos";
 
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     this.authService.obtenerUsuario().then((usuarioFire:any)=>{
@@ -36,7 +41,7 @@ export class MisTurnosPacienteComponent implements OnInit {
         this.turnos.subscribe(turnos => {
           this.listaTurnos = turnos;
           this.listaTurnos = this.listaTurnos.filter(turno => {
-            if(turno.emailPaciente == this.miUsuario.email && turno.estado == "Pendiente") {
+            if(turno.emailPaciente == this.miUsuario.email && (turno.estado == "Pendiente" || turno.estado == "Atendido" || turno.estado == "Cancelado")) {
               return turno;
             }
           });
@@ -51,7 +56,27 @@ export class MisTurnosPacienteComponent implements OnInit {
     this.cancelar.emit();
   }
 
-  rechazarTurno(id:string) {
-    this.turnosService.cancelarTurno(id);
+  rechazarTurno(turno:Turno) {
+    turno.estado = "Cancelado";
+    this.turnosService.actualizarTurno(turno);
+  }
+
+  encuestaTurno(turno:Turno) {
+    this.turno = turno;
+    this.vistaMisTurnos = "Encuesta";
+  }
+
+  cambiarVista() {
+    this.vistaMisTurnos = "Turnos";
+  }
+
+  subirTurnoConResenia(turno:Turno) {
+    this.turnosService.actualizarTurno(turno);
+    this.cambiarVista();
+    this.exito.emit("Turno Atendido");
+  }
+
+  agarrarError(error:string) {
+    this.error.emit(error);
   }
 }

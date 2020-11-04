@@ -39,11 +39,13 @@ export class TurnosProfesionalComponent implements OnInit {
     this.cancelar.emit();
   }
 
-  aceptarTurno(id:string) {
-    this.turnosService.aceptarTurno(id);
+  aceptarTurno(turno:Turno) {
+    turno.estado = "Aceptado";
+    this.turnosService.actualizarTurno(turno);
   }
 
-  rechazarTurno(id:string) {
-    this.turnosService.cancelarTurno(id);
+  rechazarTurno(turno:Turno) {
+    turno.estado = "Cancelado";
+    this.turnosService.actualizarTurno(turno);
   }
 }

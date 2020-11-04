@@ -55,6 +55,15 @@ button {
     color: var(--blue);
 }
 
+button:hover {
+    border: 4px solid var(--orange);
+}
+
+button:active {
+    border: 4px solid var(--orange);
+    background: var(--orange);
+}
+
 textarea {
     width: 90%;
     height: 10%;

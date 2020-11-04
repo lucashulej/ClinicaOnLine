@@ -1,1 +1,7 @@
-<p>encuesta-paciente works!</p>
+<div class="cnt-encuesta-paciente">
+    <textarea name="mensaje" [(ngModel)]="turno.reseniaPaciente" placeholder="Reseña sobre el Profesional"></textarea>
+    <div class="cnt-input-encuesta-paciente">
+        <button type="button" (click)="salir()">Cancelar</button>
+        <button type="button" (click)="guardarEncuesta()">Guardar Encuensta</button>
+    </div>
+</div>
