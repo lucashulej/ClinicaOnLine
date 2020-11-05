@@ -205,8 +205,8 @@ export class PedirTurnosPacienteComponent implements OnInit {
     for (const turno of this.listaTurnos) {
       let fechaAuxTurno = new Date(turno.fecha);
       fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
-      alert("BASE = " + fechaAuxTurno.getDate());
-      alert("MIO = " + fechaAux.getDate());
+      console.log("BASE = " + fechaAuxTurno.getDate());
+      console.log("MIO = " + fechaAux.getDate());
       if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate() && turno.idProfesional == this.profesionalSeleccionado.id) {
         turnosDelDia.push(turno);
       } 
@@ -248,7 +248,6 @@ export class PedirTurnosPacienteComponent implements OnInit {
   }
 
   pedirTurno() {
-    alert(new Date());
     let fechaAux = new Date(this.fechaSeleccionada);
     fechaAux.setDate(fechaAux.getDay()+2);
     if(this.especialidadSeleccionada != "") {
