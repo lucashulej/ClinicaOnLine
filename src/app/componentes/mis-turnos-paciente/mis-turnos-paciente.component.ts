@@ -25,7 +25,7 @@ export class MisTurnosPacienteComponent implements OnInit {
   turno: Turno = new Turno();
   miUsuario:Usuario;
   vistaMisTurnos = "Turnos";
-
+  
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
     this.authService.obtenerUsuario().then((usuarioFire:any)=>{
       this.usaurios = this.db.list('usuarios').valueChanges(); 
@@ -37,12 +37,17 @@ export class MisTurnosPacienteComponent implements OnInit {
             break;
           }
         }
-        this.turnos = this.db.list('turnos').valueChanges(); 
+        this.turnos = this.db.list('turnos').valueChanges();
+        let fechaAux = new Date(); 
         this.turnos.subscribe(turnos => {
           this.listaTurnos = turnos;
           this.listaTurnos = this.listaTurnos.filter(turno => {
             if(turno.emailPaciente == this.miUsuario.email && (turno.estado == "Pendiente" || turno.estado == "Atendido" || turno.estado == "Cancelado")) {
-              return turno;
+              let fechaAuxTurno = new Date(turno.fecha);
+              fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
+              if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate()) {
+                return turno;
+              } 
             }
           });
         }, error => console.log(error));

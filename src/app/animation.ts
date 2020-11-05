@@ -2,100 +2,41 @@ import { trigger, transition, style, query, group, animateChild, animate } from 
 
 export const slideInAnimation =
   trigger('routeAnimations', [
-    transition('Login => Home', [
-      style({ position: 'relative' }),
-      query(':enter, :leave', [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%'
-        })
-      ]),
-      query(':enter', [
-        style({ left: '100%'})
-      ]),
-      query(':leave', animateChild()),
-      group([
-        query(':leave', [
-          animate('1000ms ease-out', style({ left: '-100%'}))
-        ]),
-        query(':enter', [
-          animate('1000ms ease-out', style({ left: '0%'}))
-        ])
-      ]),
-      query(':enter', animateChild()),
-    ]),
-    transition('Home => Login', [
-      style({ position: 'relative' }),
-      query(':enter, :leave', [
-        style({
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          width: '-100%'
-        })
-      ]),
-      query(':enter', [
-        style({ right: '100%'})
-      ]),
-      query(':leave', animateChild()),
-      group([
-        query(':leave', [
-          animate('1000ms ease-out', style({ right: '-100%'}))
-        ]),
-        query(':enter', [
-          animate('1000ms ease-out', style({ right: '0%'}))
-        ])
-      ]),
-      query(':enter', animateChild()),
-    ]),
     transition('Login => Register', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
-          style({
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '-100%'
-          })
-        ]),
-        query(':enter', [
-          style({ transform: 'translateY(-1000px)'})
-        ]),
-        query(':leave', animateChild()),
-        group([
-          query(':leave', [
-            animate('1000ms ease-out', style({ transform: 'translateY(1000px)'}))
-          ]),
-          query(':enter', [
-            animate('1000ms ease-out', style({ transform: 'translateY(0px)'}))
-          ])
-        ]),
-        query(':enter', animateChild()),
+      query(':enter', [
+        style({ opacity: 0 , position: 'absolute' , left: '25vw' , top: '-100vh' }), //afecta Registro
       ]),
-      transition('Register => Login', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
-          style({
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            height: '-100%'
-          })
-        ]),
+      query(':leave', [
+        style({ opacity: 1 , position: 'absolute' , left: '25vw' , top: '13vh' }), //afecta Login
+      ]),
+      group([
         query(':enter', [
-          style({ transform: 'translateY(1000px)'})
+          animate('1500ms', style({ opacity: 1 , position: 'absolute' , left: '25vw' , top: '0vh' })) //afecta Registro
         ]),
-        query(':leave', animateChild()),
-        group([
-          query(':leave', [
-            animate('1000ms ease-out', style({ transform: 'translateY(-1000px)'}))
-          ]),
-          query(':enter', [
-            animate('1000ms ease-out', style({ transform: 'translateY(0px)'}))
-          ])
+        query(':leave', [
+          animate('1500ms',style({ opacity: 0 , position: 'absolute' , left: '25vw' , top: '113vh' })) //afecta Login
         ]),
-        query(':enter', animateChild()),
-      ])
+      ]),
+      query(':enter', animateChild()),
+      query(':leave', animateChild()),
+    ]),
+    transition('Register => Login', [
+      query(':enter', [
+        style({ opacity: 0 , position: 'absolute' , left: '-50vw' , top: '13vh' }), //afecta Login
+      ]),
+      query(':leave', [
+        style({ opacity: 1 , position: 'absolute' , left: '25vw' , top: '0vh' }), //afecta Registro
+      ]),
+
+      group([
+        query(':enter', [
+          animate('1500ms', style({ opacity: 1 , position: 'absolute' , left: '25vw' , top: '13vh' })) //afecta Login
+        ]),
+        query(':leave', [
+          animate('1500ms',style({ opacity: 0 , position: 'absolute' , left: '100vw' , top: '0vh' })) //afecta registro
+        ]),
+      ]),
+      query(':enter', animateChild()),
+      query(':leave', animateChild()),
+    ])
   ]); 

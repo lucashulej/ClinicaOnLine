@@ -38,11 +38,16 @@ export class AtenderProfesionalComponent implements OnInit {
           }
         }
         this.turnos = this.db.list('turnos').valueChanges(); 
+        let fechaAux = new Date(); 
         this.turnos.subscribe(turnos => {
           this.listaTurnos = turnos;
           this.listaTurnos = this.listaTurnos.filter(turno => {
             if(turno.idProfesional == this.miUsuario.id && turno.estado == "Aceptado") {
-              return turno;
+              let fechaAuxTurno = new Date(turno.fecha);
+              fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
+              if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate()) {
+                return turno;
+              } 
             }
           });
         }, error => console.log(error));

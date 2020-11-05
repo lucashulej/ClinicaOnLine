@@ -39,10 +39,10 @@ export class PedirTurnosPacienteComponent implements OnInit {
   listaDias: string[];
   fechaSeleccionada: Date;
   miUsuario:Usuario;
-  dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabados", "Domingos"];
+  dias = ["Domingos", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabados"];
   horarioSeleccionado = "";
   especialidadSeleccionada = "";
-
+  
   fechaMin = "2020-05-01";
   fechaMax = "2020-11-15";
 
@@ -81,7 +81,7 @@ export class PedirTurnosPacienteComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   cambiarVista(vista:string) {
     this.vistaTabla = vista;
@@ -118,6 +118,7 @@ export class PedirTurnosPacienteComponent implements OnInit {
     for (const profesional of this.listaProfesionales) {
       if(profesional.id == id) {
         this.profesionalSeleccionado = profesional;
+        console.log(this.profesionalSeleccionado);
         this.llenarListaDeDias();
         break;
       }
@@ -145,6 +146,17 @@ export class PedirTurnosPacienteComponent implements OnInit {
       this.listaDias.push("Sabados");
     }
     console.log(this.listaDias);
+    
+    let min = new Date().toISOString().split('T')[0];
+    let aux = new Date();
+    aux.setDate(aux.getDate() + 15);
+    let max = aux.toISOString().split('T')[0];
+    setTimeout(() => {
+      document.querySelector("#fechaDesde").setAttribute('min', min);
+      document.querySelector("#fechaDesde").setAttribute('max', max);
+      //document.querySelector<HTMLInputElement>("#fechaDesde").value = min;
+    }, 1000);
+    
   }
 
   salir() {
@@ -155,6 +167,7 @@ export class PedirTurnosPacienteComponent implements OnInit {
 
   diaValido():boolean {
     let fechaAux = new Date(this.fechaSeleccionada);
+    fechaAux.setDate(fechaAux.getDay()+2);
     for (const dia of this.listaDias) {
       if(dia == this.dias[fechaAux.getDay()]) {
         return true;
@@ -184,11 +197,17 @@ export class PedirTurnosPacienteComponent implements OnInit {
   }
 
   elHorarioEstaLibre():boolean {
+    let fechaAux = new Date(this.fechaSeleccionada);
+    fechaAux.setDate(fechaAux.getDate()+1);
     let retorno = false;
     let error = false;
     let turnosDelDia:any[] = [];
     for (const turno of this.listaTurnos) {
-      if(turno.fecha == this.fechaSeleccionada && turno.idProfesinal == this.profesionalSeleccionado.id) {
+      let fechaAuxTurno = new Date(turno.fecha);
+      fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
+      alert("BASE = " + fechaAuxTurno.getDate());
+      alert("MIO = " + fechaAux.getDate());
+      if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate() && turno.idProfesional == this.profesionalSeleccionado.id) {
         turnosDelDia.push(turno);
       } 
     }
@@ -229,7 +248,9 @@ export class PedirTurnosPacienteComponent implements OnInit {
   }
 
   pedirTurno() {
+    alert(new Date());
     let fechaAux = new Date(this.fechaSeleccionada);
+    fechaAux.setDate(fechaAux.getDay()+2);
     if(this.especialidadSeleccionada != "") {
       if(this.diaValido()) {
         if(this.horarioValido(this.dias[fechaAux.getDay()])) {

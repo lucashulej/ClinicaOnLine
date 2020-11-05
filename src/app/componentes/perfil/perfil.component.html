@@ -1,5 +1,5 @@
 <app-nav-bar [salir]="true"></app-nav-bar>
-<div class="cnt-perfil">
+<div *ngIf="usuario" class="cnt-perfil">
     <div class="cnt-fotos">
         <img [src]="fotoUno">
         <img [src]="fotoDos">

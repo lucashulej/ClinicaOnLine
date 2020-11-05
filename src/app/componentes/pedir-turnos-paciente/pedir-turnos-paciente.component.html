@@ -81,7 +81,7 @@
                 <option *ngFor="let especialidad of profesionalSeleccionado.especialidades" [value]="especialidad">{{especialidad}}</option>
             </select>
             <label>Horario <input type="time" min="08:00" max="19:00" [(ngModel)]="horarioSeleccionado"></label>
-            <input type="date" value="fechaSeleccionada" [(ngModel)]="fechaSeleccionada" />
+            <input type="date" id="fechaDesde" [(ngModel)]="fechaSeleccionada" />
             <button type="button" class="btn-pedir-turno" (click)="pedirTurno()">Pedir Turno</button>
         </div>
     </div>
