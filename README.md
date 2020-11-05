@@ -25,4 +25,7 @@ Mostrales este proyectos a tus amigos, mi codigo es tu codigo 😜
 Invita una cerveza fria🍺
 Da las gracias públicamente 🤓
 
-![LOGIN](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown.png)
+# LOGIN
+(https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown.png)
+
+# REGISTRO
