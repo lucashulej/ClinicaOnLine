@@ -43,11 +43,11 @@ export class MisTurnosPacienteComponent implements OnInit {
           this.listaTurnos = turnos;
           this.listaTurnos = this.listaTurnos.filter(turno => {
             if(turno.emailPaciente == this.miUsuario.email && (turno.estado == "Pendiente" || turno.estado == "Aceptado" || turno.estado == "Atendido" || turno.estado == "Cancelado")) {
-              let fechaAuxTurno = new Date(turno.fecha);
-              fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
-              if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate()) {
+              //let fechaAuxTurno = new Date(turno.fecha);
+              //fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
+              //if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate()) {
                 return turno;
-              } 
+              //} 
             }
           });
         }, error => console.log(error));
