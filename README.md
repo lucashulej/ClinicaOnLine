@@ -26,6 +26,19 @@ Invita una cerveza fria🍺
 Da las gracias públicamente 🤓
 
 # LOGIN
-(https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown.png)
+![Login](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown.png)
 
-# REGISTRO
+# REGISTRO PACIENTE
+![RegistroPaciente](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown2.png)
+
+# REGISTRO PROFESIONAL
+![RegistroProfesional](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown1.png)
+
+# PACIENTE
+![Paciente](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/5.png)
+
+# PROFESIONAL
+![Profesional](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/4.png)
+
+# PERFIL
+![Perfil](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/6.png)
