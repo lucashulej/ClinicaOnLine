@@ -16,7 +16,7 @@ export class PerfilComponent implements OnInit {
 
   fotoUno:string = "../../../assets/images/default.jpg";
   fotoDos:string = "../../../assets/images/default.jpg";
-
+  
   usuarios: Observable<any[]>;
   listaUsuarios: any[];
   usuario:Usuario;

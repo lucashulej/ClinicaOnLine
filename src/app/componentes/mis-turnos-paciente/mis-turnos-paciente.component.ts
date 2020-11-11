@@ -5,7 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Turno } from 'src/app/clases/turno';
 import { Usuario } from 'src/app/clases/usuario';
-import { runInThisContext } from 'vm';
+
 
 @Component({
   selector: 'app-mis-turnos-paciente',
@@ -19,7 +19,7 @@ export class MisTurnosPacienteComponent implements OnInit {
   @Output() error: EventEmitter<any> = new EventEmitter();
 
   usaurios: Observable<any[]>;
-  listaUsuarios: any[];
+  listaUsuarios: any[] = [];
   turnos: Observable<any[]>;
   listaTurnos: any[];
   turno: Turno = new Turno();
@@ -38,18 +38,9 @@ export class MisTurnosPacienteComponent implements OnInit {
           }
         }
         this.turnos = this.db.list('turnos').valueChanges();
-        let fechaAux = new Date(); 
         this.turnos.subscribe(turnos => {
           this.listaTurnos = turnos;
-          this.listaTurnos = this.listaTurnos.filter(turno => {
-            if(turno.emailPaciente == this.miUsuario.email && (turno.estado == "Pendiente" || turno.estado == "Aceptado" || turno.estado == "Atendido" || turno.estado == "Cancelado")) {
-              //let fechaAuxTurno = new Date(turno.fecha);
-              //fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
-              //if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate()) {
-                return turno;
-              //} 
-            }
-          });
+          this.listaTurnos = this.listaTurnos.filter(turno => turno.emailPaciente == this.miUsuario.email);
         }, error => console.log(error));
       }, error => console.log(error));
     }).catch((error:any)=>console.log(error));
@@ -69,6 +60,11 @@ export class MisTurnosPacienteComponent implements OnInit {
   encuestaTurno(turno:Turno) {
     this.turno = turno;
     this.vistaMisTurnos = "Encuesta";
+  }
+
+  verReseniaProfesional(turno:Turno) {
+    this.turno = turno;
+    this.vistaMisTurnos = "Resenia";
   }
 
   cambiarVista() {

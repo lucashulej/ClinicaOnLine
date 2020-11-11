@@ -18,6 +18,8 @@ export class TurnosProfesionalComponent implements OnInit {
   listaTurnosPendientes: any[];
   listaTurnosAceptados: any[];
   turno: Turno = new Turno();
+  vistTurnosProfesional = "Tablas";
+
   constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private usuarioService:UsuarioService) { 
     this.turnos = this.db.list('turnos').valueChanges(); 
     this.turnos.subscribe(turnos => {
@@ -25,7 +27,11 @@ export class TurnosProfesionalComponent implements OnInit {
       this.usuarioService.obtenerTodosLosDatosDelUsuario().then((usuario:any) => {
         this.listaTurnos = this.listaTurnos.filter(turno => turno.idProfesional == usuario.id);
         this.listaTurnosPendientes = this.listaTurnos.filter(turno => turno.estado == "Pendiente");
-        this.listaTurnosAceptados = this.listaTurnos.filter(turno => turno.estado == "Aceptado");
+        this.listaTurnosAceptados = this.listaTurnos.filter(turno => {
+          if(turno.estado == "Aceptado" || turno.estado == "Atendido") {
+            return turno;
+          }
+        });
         console.log(this.listaTurnos);
         console.log(this.listaTurnosPendientes);
         console.log(this.listaTurnosAceptados);
@@ -44,8 +50,17 @@ export class TurnosProfesionalComponent implements OnInit {
     this.turnosService.actualizarTurno(turno);
   }
 
-  rechazarTurno(turno:Turno) {
+  cancelarTurno(turno:Turno) {
     turno.estado = "Cancelado";
     this.turnosService.actualizarTurno(turno);
+  }
+
+  cambiarVista() {
+    this.vistTurnosProfesional = "Tablas";
+  }
+
+  verReseniaPaciente(turno) {
+    this.turno = turno;
+    this.vistTurnosProfesional = "Reseña";
   }
 }

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { Turno } from 'src/app/clases/turno';
 import { Profesional } from 'src/app/clases/profesional';
 import { Usuario } from 'src/app/clases/usuario';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pedir-turnos-paciente',
@@ -21,32 +22,34 @@ export class PedirTurnosPacienteComponent implements OnInit {
   especialidades: Observable<any[]>;
   listaEspecialidades: any[];
 
+  turno: Turno = new Turno();
   turnos: Observable<any[]>;
   listaTurnos: any[];
-  turno: Turno = new Turno();
+  listaTurnosPorProfesionales: any[];
   
   profesionales: Observable<any[]>;
   listaProfesionales: any[];
-  listaProfesionalesApellido: any[];
-  listaProfesionalesEspecialidad: any[];
-  listaProfesionalesSemana: any[];
+  listaProfesionalesPorEspecialidad: any[];
 
   vistaTabla:string = "Apellido";
   filtroSemana = "";
   filtroEspecialidad = "";
 
   profesionalSeleccionado:Profesional;
+  turnoSeleccionado:Turno;
   listaDias: string[];
   fechaSeleccionada: Date;
   miUsuario:Usuario;
   dias = ["Domingos", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabados"];
   horarioSeleccionado = "";
   especialidadSeleccionada = "";
-  
   fechaMin = "2020-05-01";
   fechaMax = "2020-11-15";
 
-  constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService) { 
+  horariosSemanal = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"];
+  horariosSabados = ["08:00","09:00","10:00","11:00","12:00","13:00"];
+
+  constructor(private db : AngularFireDatabase, private turnosService:TurnosService, private authService:AuthService, private datePipe : DatePipe) { 
     
     this.fechaSeleccionada = new Date();
 
@@ -66,7 +69,6 @@ export class PedirTurnosPacienteComponent implements OnInit {
           }
         }
         this.listaProfesionales = this.listaProfesionales.filter(profesional => profesional.habilitado == true);
-        this.cargarListaProfesionales();
       }, error => console.log(error));
     }).catch((error:any)=>console.log(error));
     
@@ -74,7 +76,7 @@ export class PedirTurnosPacienteComponent implements OnInit {
     this.turnos.subscribe(turnos => {
       this.listaTurnos = turnos;
       this.listaTurnos = this.listaTurnos.filter(turno => {
-        if(turno.estado == "Pendiente" || turno.estado == "Aceptado") {
+        if(turno.estado == "Pendiente" || turno.estado == "Aceptado" || turno.estado == "Atendido") {
           return turno;
         }
       });
@@ -83,201 +85,136 @@ export class PedirTurnosPacienteComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  cambiarVista(vista:string) {
-    this.vistaTabla = vista;
-    if(vista == "Especialidad") {
-      this.listaProfesionalesEspecialidad = [];
-      this.listaProfesionalesEspecialidad = this.listaProfesionales.filter(profesional => profesional.especialidades.includes(this.filtroEspecialidad));
-    } else if (vista == "Semana") {
-      this.listaProfesionalesSemana = [];
-      this.listaProfesionalesSemana = this.listaProfesionales.filter(profesional => {
-        if(profesional.diasLaborales[this.filtroSemana]) {
-          return profesional;
-        }
-      });
-    }
-  }
-
-  cargarListaProfesionales() {
-    console.log(this.listaProfesionales);
-    this.listaProfesionalesApellido = this.listaProfesionales;
-    this.listaProfesionalesApellido.sort(this.ordenarApellido);
-  }
-
-  ordenarApellido(a:any , b:any) {
-    if (a.apellido < b.apellido) {
-      return -1;
-    }
-    if (a.apellido > b.apellido) {
-      return 1;
-    }
-    return 0;
-  }
-
-  seleccionarProfesional(id:string) {
-    for (const profesional of this.listaProfesionales) {
-      if(profesional.id == id) {
-        this.profesionalSeleccionado = profesional;
-        console.log(this.profesionalSeleccionado);
-        this.llenarListaDeDias();
-        break;
+  agarrarEspecialidadSeleccionada(especialidad) {
+    this.especialidadSeleccionada = especialidad;
+    this.listaTurnosPorProfesionales = null;
+    this.listaProfesionalesPorEspecialidad = this.listaProfesionales.filter(profesional => {
+      if(profesional.especialidades.includes(especialidad)) {
+        return profesional;
       }
+    });
+    if(this.listaProfesionalesPorEspecialidad.length == 0) {
+      this.error.emit('No existe ningun profesional habilitado con esa especialidad');
     }
   }
 
-  llenarListaDeDias() {
-    this.listaDias = [];
-    if(this.profesionalSeleccionado.diasLaborales["Lunes"]) {
-      this.listaDias.push("Lunes");
-    }
-    if(this.profesionalSeleccionado.diasLaborales["Martes"]) {
-      this.listaDias.push("Martes");
-    }
-    if(this.profesionalSeleccionado.diasLaborales["Miercoles"]) {
-      this.listaDias.push("Miercoles");
-    }
-    if(this.profesionalSeleccionado.diasLaborales["Jueves"]) {
-      this.listaDias.push("Jueves");
-    }
-    if(this.profesionalSeleccionado.diasLaborales["Viernes"]) {
-      this.listaDias.push("Viernes");
-    }
-    if(this.profesionalSeleccionado.diasLaborales["Sabados"]) {
-      this.listaDias.push("Sabados");
-    }
-    console.log(this.listaDias);
-    
-    let min = new Date().toISOString().split('T')[0];
-    let aux = new Date();
-    aux.setDate(aux.getDate() + 15);
-    let max = aux.toISOString().split('T')[0];
-    setTimeout(() => {
-      document.querySelector("#fechaDesde").setAttribute('min', min);
-      document.querySelector("#fechaDesde").setAttribute('max', max);
-      //document.querySelector<HTMLInputElement>("#fechaDesde").value = min;
-    }, 1000);
-    
+  agarrarProfesionalSeleccionado(profesional) {
+    let listaTurnosProfesional = this.listaTurnos.filter(turno => turno.idProfesional == profesional.id);
+    this.llenarListaDeDias(profesional);
+    this.crearTurnosDisponibles(profesional, listaTurnosProfesional);
+  }
+  
+  agarrarTurnoSeleccionado(turno) {
+    this.turnosService.nuevoTurno(turno);
+    this.exito.emit("Turno solicitado");
+    this.salir();
   }
 
   salir() {
     this.cancelar.emit();
   }
 
-  ////////////////////////////////////////////////////
+  crearTurnosDisponibles(profesional, listaTurnosProfesional) {
+    this.listaTurnosPorProfesionales = [];
+    let hoy = new Date();
+    let contadorDias = 0;
+    do {
+      let nuevaFecha = this.datePipe.transform(hoy, "yyyy-MM-dd");
+      if(this.diaValido(nuevaFecha)) {
+        if(this.esUnSabado(nuevaFecha)) { 
+          for (const horario of this.horariosSabados) {
+            if(horario >= profesional.desdeSabados && horario < profesional.hastaSabados) { // SI EL HORARIO ES POSIBLE
+              let agregarTurnoDisponible = true;
+              for (const turno of listaTurnosProfesional) {
+                if(turno.fecha == nuevaFecha && turno.horario == horario) {
+                  agregarTurnoDisponible = false;
+                } 
+              }
+              if(agregarTurnoDisponible) {
+                let turno = new Turno();
+                turno.idProfesional = profesional.id;
+                turno.emailPaciente = this.miUsuario.email;
+                turno.especialidad = this.especialidadSeleccionada;
+                turno.fecha = nuevaFecha;
+                turno.horario = horario;
+                this.listaTurnosPorProfesionales.push(turno);
+              }
+            } 
+          }
+        } else { //SI ES DIA SEMANAL
+          for (const horario of this.horariosSemanal) {
+            if(horario >= profesional.desdeSemanal && horario < profesional.hastaSemanal) { // SI EL HORARIO ES POSIBLE
+              let agregarTurnoDisponible = true;
+              for (const turno of listaTurnosProfesional) {
+                if(turno.fecha == nuevaFecha && turno.horario == horario) {
+                  agregarTurnoDisponible = false;
+                } 
+              }
+              if(agregarTurnoDisponible) {
+                let turno = new Turno();
+                turno.idProfesional = profesional.id;
+                turno.emailPaciente = this.miUsuario.email;
+                turno.especialidad = this.especialidadSeleccionada;
+                turno.fecha = nuevaFecha;
+                turno.horario = horario;
+                turno.nombreProfesional = profesional.nombre;
+                turno.nombrePaciente = this.miUsuario.nombre;
+                this.listaTurnosPorProfesionales.push(turno);
+              }
+            }
+          }
+        }
+      }
+      hoy.setDate(hoy.getDate() + 1);
+      contadorDias++;
+    }while(contadorDias < 15);
+  }
 
-  diaValido():boolean {
-    let fechaAux = new Date(this.fechaSeleccionada);
-    fechaAux.setDate(fechaAux.getDay()+2);
+  diaValido(nuevaFecha):boolean {
+    let year = Number.parseInt(nuevaFecha[0] + nuevaFecha[1] + nuevaFecha[2] + nuevaFecha[3]);
+    let month = Number.parseInt(nuevaFecha[5] + nuevaFecha[6]);
+    month = month -1;
+    let day = Number.parseInt(nuevaFecha[8] + nuevaFecha[9]);
+    let nuevaFechaAux = new Date(year, month, day, 0,0,0,0);
     for (const dia of this.listaDias) {
-      if(dia == this.dias[fechaAux.getDay()]) {
+      if(dia == this.dias[nuevaFechaAux.getDay()]) {
         return true;
       }
     }
-    return false;;
+    return false;
   }
 
-  horarioValido(dia:string):boolean {
-    let retorno = false;
-    if(this.horarioSeleccionado.length != 0 ) {
-      if(dia == "Sabados") {
-        if(this.horarioSeleccionado >= this.profesionalSeleccionado.desdeSabados && this.horarioSeleccionado < this.profesionalSeleccionado.hastaSabados) {
-          if(this.diferenciaEnMinutos(this.horarioSeleccionado ,this.profesionalSeleccionado.hastaSabados) >= this.profesionalSeleccionado.duracion) {
-            retorno = true;
-          } 
-        } 
-      } else {
-        if(this.horarioSeleccionado >= this.profesionalSeleccionado.desdeSemanal && this.horarioSeleccionado < this.profesionalSeleccionado.hastaSemanal) {
-          if(this.diferenciaEnMinutos(this.horarioSeleccionado ,this.profesionalSeleccionado.hastaSemanal) >= this.profesionalSeleccionado.duracion) {
-            retorno = true;
-          } 
-        }
-      }
+  esUnSabado(nuevaFecha):boolean {
+    let year = Number.parseInt(nuevaFecha[0] + nuevaFecha[1] + nuevaFecha[2] + nuevaFecha[3]);
+    let month = Number.parseInt(nuevaFecha[5] + nuevaFecha[6]);
+    month = month - 1;
+    let day = Number.parseInt(nuevaFecha[8] + nuevaFecha[9]);
+    let nuevaFechaAux = new Date(year, month, day, 0,0,0,0)
+    if(this.dias[nuevaFechaAux.getDay()] == "Sabados") {
+      return true;
     }
-    return retorno;
+    return false;
   }
-
-  elHorarioEstaLibre():boolean {
-    let fechaAux = new Date(this.fechaSeleccionada);
-    fechaAux.setDate(fechaAux.getDate()+1);
-    let retorno = false;
-    let error = false;
-    let turnosDelDia:any[] = [];
-    for (const turno of this.listaTurnos) {
-      let fechaAuxTurno = new Date(turno.fecha);
-      fechaAuxTurno.setDate(fechaAuxTurno.getDate()+1);
-      console.log("BASE = " + fechaAuxTurno.getDate());
-      console.log("MIO = " + fechaAux.getDate());
-      if(fechaAuxTurno.getFullYear() == fechaAux.getFullYear() && fechaAuxTurno.getMonth() == fechaAux.getMonth() && fechaAuxTurno.getDate() == fechaAux.getDate() && turno.idProfesional == this.profesionalSeleccionado.id) {
-        turnosDelDia.push(turno);
-      } 
+  
+  llenarListaDeDias(profesional) {
+    this.listaDias = [];
+    if(profesional.diasLaborales["Lunes"]) {
+      this.listaDias.push("Lunes");
     }
-    if(turnosDelDia.length == 0) {
-      retorno = true;
-    } else {
-      for (const turno of turnosDelDia) {
-        if(this.horarioSeleccionado > turno.horario) {
-          if(this.diferenciaEnMinutos(turno.horario, this.horarioSeleccionado) < this.profesionalSeleccionado.duracion) {
-            error = true;
-            break;
-          }
-        } else if (this.horarioSeleccionado < turno.horario) { 
-          if(this.diferenciaEnMinutos(this.horarioSeleccionado, turno.horario) < this.profesionalSeleccionado.duracion) {
-            error = true;
-            break;
-          }
-        } else {
-          error = true;
-          break;
-        }
-      }
-      if(!error) {
-        retorno = true;
-      }
+    if(profesional.diasLaborales["Martes"]) {
+      this.listaDias.push("Martes");
     }
-    return retorno;
-  }
-
-  diferenciaEnMinutos(horarioA, horarioB):number { 
-    let horaA = horarioA[0] + horarioA[1];
-    let minutosA = horarioA[3] + horarioA[4];
-    let horaB = horarioB[0] + horarioB[1];
-    let minutosB = horarioB[3] + horarioB[4];
-    let fechaDesde:Date = new Date(1970 , 0O1, 0O1, Number.parseInt(horaA), Number.parseInt(minutosA), 0, 0);
-    let fechaHasta:Date = new Date(1970 , 0O1, 0O1, Number.parseInt(horaB), Number.parseInt(minutosB), 0, 0);
-    return ((fechaHasta.getTime()/60000) - (fechaDesde.getTime()/60000));
-  }
-
-  pedirTurno() {
-    let fechaAux = new Date(this.fechaSeleccionada);
-    fechaAux.setDate(fechaAux.getDay()+2);
-    if(this.especialidadSeleccionada != "") {
-      if(this.diaValido()) {
-        if(this.horarioValido(this.dias[fechaAux.getDay()])) {
-          if(this.elHorarioEstaLibre()) {
-            this.crearTurno();
-          } else {
-            this.error.emit("Ese turno se interpone con otro");
-          }
-        } else {
-          this.error.emit("Seleccione un horario valido");
-        }
-      } else {
-        this.error.emit("En la fecha seleccionada el profesional no trabaja");
-      }
-    } else {
-      this.error.emit("Seleccione la especialidad del medico");
+    if(profesional.diasLaborales["Miercoles"]) {
+      this.listaDias.push("Miercoles");
     }
-  }
-
-  crearTurno() {
-    let turno = new Turno();
-    turno.idProfesional = this.profesionalSeleccionado.id;
-    turno.emailPaciente = this.miUsuario.email;
-    turno.especialidad = this.especialidadSeleccionada;
-    turno.fecha = this.fechaSeleccionada;
-    turno.horario = this.horarioSeleccionado;
-    this.turnosService.nuevoTurno(turno);
-    this.exito.emit("Turno solicitado");
-    this.profesionalSeleccionado = null;
+    if(profesional.diasLaborales["Jueves"]) {
+      this.listaDias.push("Jueves");
+    }
+    if(profesional.diasLaborales["Viernes"]) {
+      this.listaDias.push("Viernes");
+    }
+    if(profesional.diasLaborales["Sabados"]) {
+      this.listaDias.push("Sabados");
+    }
   }
 }

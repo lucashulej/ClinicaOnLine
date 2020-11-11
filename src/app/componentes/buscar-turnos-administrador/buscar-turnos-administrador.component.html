@@ -1,0 +1,38 @@
+<div *ngIf="!mostrarTurno" class="cnt-buscar-turnos">
+    <div class="cnt-buscar-turnos-titulo">
+        <input type="text" placeholder="filtro de busqueda" (input)="cambioFiltro($event)">
+    </div>
+    <div class="cnt-buscar-turnos-titulo">
+        <span>TURNOS</span>
+    </div>
+    <div  class="cnt-buscar-turnos-tabla">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="main-td">DIA</td>
+                    <td class="main-td">FECHA</td>
+                    <td class="main-td">ESPECIALIDAD</td>
+                    <td class="main-td">ESTADO</td>
+                    <td class="main-td">NOMBRE PACIENTE</td>
+                    <td class="main-td">NOMBRE PROFESIONAL</td>
+                    <td class="main-td">EDAD</td>
+                    <td class="main-td">TEMPERATURA</td>
+                    <td class="main-td">PRESION</td>
+                </tr>
+                <tr *ngFor="let turno of listaTurnos | diaDeLaFecha" (click)="seleccionarTurno(turno)">
+                    <td>{{turno.dia}}</td>
+                    <td>{{turno.fecha}}</td>
+                    <td>{{turno.especialidad}}</td>
+                    <td [changeStatusColor]="turno.estado">{{turno.estado}}</td>
+                    <td>{{turno.nombrePaciente}}</td>
+                    <td>{{turno.nombreProfesional}}</td>
+                    <td>{{turno.edad}}</td>
+                    <td>{{turno.temperatura}}</td>
+                    <td>{{turno.presion}}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <button type="button" (click)="salir()">Cancelar</button>
+</div>
+<app-ver-turno *ngIf="mostrarTurno" [profesional]="profesional" [paciente]="paciente" [fotosPaciente]="fotosPaciente" [fotosProfesional]="fotosProfesional" [turno]="turno" (cancelar)="agarrarCancelar()"></app-ver-turno>

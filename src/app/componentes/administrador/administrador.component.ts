@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from '../../servicios/auth.service';
 import { Administrador } from 'src/app/clases/administrador';
 
+
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
@@ -17,6 +18,11 @@ export class AdministradorComponent implements OnInit {
   listaUsuarios: any[];
   listaProfesionalesNoHabilitados: any[];
   miAdministrador:Administrador;
+
+  turnos: Observable<any[]>;
+  listaTurnos: any[];
+  listaProfesionales: any[];
+  listaPacientes: any[];
 
   constructor(private db : AngularFireDatabase, private authService : AuthService, private toast: ToastrService) { 
     this.usuarios = this.db.list('usuarios').valueChanges(); 
@@ -31,11 +37,27 @@ export class AdministradorComponent implements OnInit {
         }
         this.listaProfesionalesNoHabilitados = this.listaUsuarios.filter(usuario => {
           if(usuario.perfil == "Profesional" && usuario.habilitado == false) {
-              return usuarioFire;
+              return usuario; //esta return usuarioFire
           }
         });
+
+        this.listaProfesionales = this.listaUsuarios.filter(usuario => {
+          if(usuario.perfil == "Profesional" && usuario.habilitado == true) {
+              return usuario; 
+          }
+        });
+
+        this.listaPacientes = this.listaUsuarios.filter(usuario => {
+          if(usuario.perfil == "Paciente") {
+              return usuario; 
+          }
+        });
+        console.log(this.listaProfesionalesNoHabilitados);
       }).catch((error:any)=>console.log(error));
     }, error => console.log(error));
+
+    this.turnos = this.db.list('turnos').valueChanges(); 
+    this.turnos.subscribe(turnos => this.listaTurnos = turnos, error => console.log(error));
   }
 
   ngOnInit(): void {}

@@ -8,16 +8,43 @@
         <label><input type="checkbox" [(ngModel)]="diasLaborales['Viernes']">Viernes</label>
         <label><input type="checkbox" [(ngModel)]="diasLaborales['Sabados']">Sabado</label>
     </div>
-    <span>Franja Horaria</span>
+    <span >Franja Horaria Semanal</span>
     <div class="cnt-horarios-terciario-profesional">
-        <label>Desde<input type="time" min="08:00" max="19:00" [(ngModel)]="desdeSemanal"></label>
-        <label>Duracion Turnos<input type="number" min="30" max="60" step="10" [(ngModel)]="duracion"></label>
-        <label>Hasta<input type="time" min="08:00" max="19:00" [(ngModel)]="hastaSemanal"></label>
+        <label>
+            Desde
+            <select [(ngModel)]="desdeSemanal">
+                <option *ngFor="let horario of horariosSemanal" [value]="horario">{{horario}}</option>
+            </select>
+        </label>
+      
+        <label>
+            Hasta
+            <select [(ngModel)]="hastaSemanal">
+                <option *ngFor="let horario of horariosSemanal" [value]="horario">{{horario}}</option>
+            </select>
+        </label>
     </div>
+    <label>
+        Duracion Turnos
+        <select [(ngModel)]="duracion">
+            <option [value]="30">30</option>
+            <option [value]="60">60</option>
+        </select>
+    </label>
     <span *ngIf="diasLaborales['Sabados']">Franja Horaria Sabados</span>
     <div *ngIf="diasLaborales['Sabados']" class="cnt-horarios-terciario-profesional">
-        <label>Desde<input type="time" min="08:00" max="19:00" [(ngModel)]="desdeSabados"></label>
-        <label>Hasta<input type="time" min="08:00" max="19:00" [(ngModel)]="hastaSabados"></label>
+        <label>
+            Desde
+            <select [(ngModel)]="desdeSabados">
+                <option *ngFor="let horario of horariosSabados" [value]="horario">{{horario}}</option>
+            </select>
+        </label>
+        <label>
+            Hasta
+            <select [(ngModel)]="hastaSabados">
+                <option *ngFor="let horario of horariosSabados" [value]="horario">{{horario}}</option>
+            </select>
+        </label>
     </div>
     <div class="cnt-horarios-terciario-profesional">
         <button type="button" (click)="salir()">Volver</button>

@@ -1,91 +1,10 @@
 <div class="cnt-pedir-turnos-paciente">
-    <div class="cnt-pedir-turnos-terciario">
-        <div class="cnt-pedir-turnos-secundario">
-            <div class="cnt-pedir-turnos-btns">
-                <div class="cnt-filter">
-                    <button type="button" (click)="cambiarVista('Especialidad')" class="btn-filtrar">Buscar por Especialidad</button>
-                    <select class="select-filtrar" [(ngModel)]="filtroEspecialidad"> 
-                        <option [value]="''">Seleccione Especialidad</option>
-                        <option *ngFor="let especialidad of listaEspecialidades" [value]="especialidad">{{especialidad}}</option>
-                    </select>
-                </div>
-                <button type="button" (click)="cambiarVista('Apellido')" class="btn-filtrar-individual">Apellido</button>
-                <div  class="cnt-filter">
-                    <select class="select-filtrar" [(ngModel)]="filtroSemana"> 
-                        <option [value]="''">Seleccione Dia Semana</option>
-                        <option [value]="'Lunes'">Lunes</option>
-                        <option [value]="'Martes'">Martes</option>
-                        <option [value]="'Miercoles'">Miercoles</option>
-                        <option [value]="'Jueves'">Jueves</option>
-                        <option [value]="'Viernes'">Viernes</option>
-                        <option [value]="'Sabados'">Sabados</option>
-                    </select>
-                    <button type="button" (click)="cambiarVista('Semana')" class="btn-filtrar">Buscar por Dia</button>
-                </div>
-            </div>
-            <div class="cnt-pedir-turnos-tabla">
-                <table *ngIf="vistaTabla == 'Apellido'">
-                    <tbody>
-                        <tr>
-                            <td class="main-td">Nombre</td>
-                            <td class="main-td">Apellido</td>
-                            <td class="main-td">Especialidades</td>
-                        </tr>
-                        <tr *ngFor="let profesional of listaProfesionalesApellido" class="select-td" (click)="seleccionarProfesional(profesional.id)">
-                            <td>{{profesional.nombre}}</td>
-                            <td>{{profesional.apellido}}</td>
-                            <td>{{profesional.especialidades}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table *ngIf="vistaTabla == 'Especialidad'">
-                    <tbody>
-                        <tr>
-                            <td class="main-td">Nombre</td>
-                            <td class="main-td">Apellido</td>
-                            <td class="main-td">Especialidades</td>
-                        </tr>
-                        <tr *ngFor="let profesional of listaProfesionalesEspecialidad" class="select-td" (click)="seleccionarProfesional(profesional.id)">
-                            <td>{{profesional.nombre}}</td>
-                            <td>{{profesional.apellido}}</td>
-                            <td>{{profesional.especialidades}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table *ngIf="vistaTabla == 'Semana'">
-                    <tbody>
-                        <tr>
-                            <td class="main-td">Nombre</td>
-                            <td class="main-td">Apellido</td>
-                            <td class="main-td">Especialidades</td>
-                        </tr>
-                        <tr *ngFor="let profesional of listaProfesionalesSemana" class="select-td" (click)="seleccionarProfesional(profesional.id)">
-                            <td>{{profesional.nombre}}</td>
-                            <td>{{profesional.apellido}}</td>
-                            <td>{{profesional.especialidades}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-        </div>
-        <div class="cnt-pedir-turnos-secundario" *ngIf="profesionalSeleccionado">
-            <h1>Dr {{profesionalSeleccionado.nombre}} {{profesionalSeleccionado.apellido}}</h1>
-            <h1>Especialidades: {{profesionalSeleccionado.especialidades}}</h1>
-            <h1>Atiende los Dias: {{listaDias}}</h1>
-            <h1>Horarios Semana: {{profesionalSeleccionado.desdeSemanal}}hs a {{profesionalSeleccionado.hastaSemanal}}hs</h1>
-            <h1 *ngIf="listaDias.includes('Sabados')">Horarios Sabados: {{profesionalSeleccionado.desdeSabados}}hs a {{profesionalSeleccionado.hastaSabados}}hs</h1>
-            <h1>Duracion Turno: {{profesionalSeleccionado.duracion}} minutos</h1>
-            <select [(ngModel)]="especialidadSeleccionada">
-                <option [value]="''">Seleccione Especialidad</option>
-                <option *ngFor="let especialidad of profesionalSeleccionado.especialidades" [value]="especialidad">{{especialidad}}</option>
-            </select>
-            <label>Horario <input type="time" min="08:00" max="19:00" [(ngModel)]="horarioSeleccionado"></label>
-            <input type="date" id="fechaDesde" [(ngModel)]="fechaSeleccionada" />
-            <button type="button" class="btn-pedir-turno" (click)="pedirTurno()">Pedir Turno</button>
-        </div>
+    <div class="cnt-pedir-turnos-primario">
+        <app-especialidades *ngIf="listaEspecialidades" [listaEspecialidades]="listaEspecialidades" (especialidadSeleccionada)="agarrarEspecialidadSeleccionada($event)"></app-especialidades>
+        <app-profesionales *ngIf="listaProfesionalesPorEspecialidad" [listaProfesionales]="listaProfesionalesPorEspecialidad" (profesionalSeleccionado)="agarrarProfesionalSeleccionado($event)"></app-profesionales>
+        <app-turnos *ngIf="listaTurnosPorProfesionales" [listaTurnos]="listaTurnosPorProfesionales" (turnoSeleccionado)="agarrarTurnoSeleccionado($event)"></app-turnos>
     </div>
-    <div class="cnt-pedir-turnos-volver-btn">
-        <button type="button" class="btn-volver" (click)="salir()">Volver</button> 
+    <div class="cnt-pedir-turnos-secundario">
+        <button type="button" (click)="salir()">Cancelar</button>
     </div>
 </div>

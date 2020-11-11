@@ -34,7 +34,7 @@ export class EncuestaProfesionalComponent implements OnInit {
       this.turno.estado = "Atendido";
       this.turnoAtendido.emit(this.turno);
     } else {
-      this.error.emit("Si agrego un campo debe completarlo");
+      this.error.emit("Complete los campos");
     }
   }
 
@@ -58,6 +58,9 @@ export class EncuestaProfesionalComponent implements OnInit {
         break;
       default:
         break;  
+    }
+    if(this.turno.temperatura == null || this.turno.presion == null || this.turno.edad.toString() == null) {
+      retorno = true;
     }
     return retorno;
   }

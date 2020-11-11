@@ -1,0 +1,14 @@
+<div class="cnt-especialidades">
+    <div class="cnt-especialidades-titulo">
+        <span>ESPECIALIDADES</span>
+    </div>
+    <div  class="cnt-especialidades-tabla">
+        <table>
+            <tbody>
+                <tr *ngFor="let especialidad of listaEspecialidades" (click)="seleccionarEspecialidad(especialidad)">
+                    <td>{{especialidad}}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+</div>

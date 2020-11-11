@@ -3,7 +3,7 @@
     font-size: 1.5rem;
 }
 
-.cnt-pedir-turnos-paciente {
+.cnt-ver-turno {
     width: 75vw;
     height: 75vh;
     background: var(--white);
@@ -15,7 +15,7 @@
     flex-direction: column;  
 }
 
-.cnt-pedir-turnos-primario {
+.cnt-ver-turno-secundario {
     width: 100%;
     height: 90%;
     display: flex;
@@ -24,29 +24,62 @@
     flex-direction: row;  
 }
 
-.cnt-pedir-turnos-secundario {
+.cnt-ver-turno-terciario {
+    width: 33.33%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;  
+}
+
+.cnt-fotos {
     width: 100%;
-    height: 10%;
+    height: 15%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: row;  
 }
 
+.titulo {
+    color: var(--blue);
+}
+
 button {
     width: 20%;
-    height: 100%;
-    text-align: center;
+    height: 8%;
     border: 2px solid var(--orange);
     background: transparent;
     color: var(--blue);
 }
 
-button:hover {
+button:hover { 
     border: 4px solid var(--orange);
 }
 
-button:active {
+button:active { 
     border: 4px solid var(--orange);
     background: var(--orange);
+}
+
+img {
+    height: 100%;
+    border: 4px solid var(--orange);
+}
+
+span {
+    width: 100%;
+    text-align: center;
+}
+
+strong {
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    border: 2px solid var(--orange);
 }

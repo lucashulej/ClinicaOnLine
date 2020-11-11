@@ -38,8 +38,11 @@ td {
 }
 
 .btn-turnos-atender {
-    border: 0px;
+    width: 100%;
+    height: 100%;
     background: green;
+    border: 0px;
+    color: white;
 }
 
 .btn-volver {
@@ -50,11 +53,11 @@ td {
     color: var(--blue);
 }
 
-.btn-volver:hover { 
+.btn-volver:hover, .btn-turnos-atender:hover { 
     border: 4px solid var(--orange);
 }
 
-.btn-volver:active { 
+.btn-volver:active, .btn-turnos-atender:active  { 
     border: 4px solid var(--orange);
     background: var(--orange);
 }

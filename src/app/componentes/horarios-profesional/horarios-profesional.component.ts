@@ -23,10 +23,10 @@ export class HorariosProfesionalComponent implements OnInit {
   desdeSabados = "08:00";
   hastaSabados = "14:00";
   duracion = 30;
-
+  horariosSemanal = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"];
+  horariosSabados = ["08:00","09:00","10:00","11:00","12:00","13:00"];
   usuarios: Observable<any[]>;
   listaUsuarios: any[];
-
 
   constructor(private usuarioService: UsuarioService, private authService : AuthService, private db : AngularFireDatabase) {
     this.authService.obtenerUsuario().then((usuarioFire:any) => {
@@ -54,6 +54,7 @@ export class HorariosProfesionalComponent implements OnInit {
     this.cancelar.emit();
   }
 
+  /*
   guardar() {
     if(this.seleccionoDiaSemana()) {
       if(this.verificarDuracion()) {
@@ -87,6 +88,18 @@ export class HorariosProfesionalComponent implements OnInit {
       this.error.emit("Debe seleccionar almenos un dia de la semana (Lunes - Viernes) para trabajar");
     }
   }
+  */
+
+  guardar() {
+    if(this.seleccionoDiaSemana()) {
+      this.asignarValores(); 
+      this.usuarioService.actualizarProfesional(this.profesional);
+      this.exito.emit("Se actualizo los horarios de manera correcta");
+      this.salir();
+    } else {
+      this.error.emit("Debe seleccionar almenos un dia de la semana (Lunes - Viernes) para trabajar");
+    }
+  }
 
   asignarValores() {
     this.profesional.diasLaborales = this.diasLaborales;
@@ -109,20 +122,7 @@ export class HorariosProfesionalComponent implements OnInit {
     return false;
   }
 
-  verificarDuracion():boolean {
-    let retorno = false;
-    if(this.duracion >= 30) {
-      if(this.duracion <= 60) {
-        retorno = true;
-      } else {
-        this.error.emit("Los turnos duran como maximo 60 minutos");
-      }
-    } else {
-      this.error.emit("Los turnos duran almenos 30 minutos");
-    }
-    return retorno;
-  }
-
+  /*
   verificarHorariosCorrectos(caso:string):boolean {
     let retorno = false;
     if(caso == "Semanal") {
@@ -168,4 +168,5 @@ export class HorariosProfesionalComponent implements OnInit {
     }
     return retorno;
   }
+  */
 }

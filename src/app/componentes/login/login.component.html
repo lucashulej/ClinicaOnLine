@@ -5,7 +5,9 @@
         <input type="password" placeholder="Ingrese Clave" [(ngModel)]="pass" name="clave" required>
         <div class="btn-cnt-login">
         <button type="button" (click)="ingresar()">INGRESAR</button>
-        <button type="button" (click)="cargarUsuario()">CARGAR USUARIO</button>
+        <button type="button" (click)="cargarUsuario()">PROFESIONAL</button>
+        <button type="button" (click)="cargarPaciente()">PACIENTE</button>
+        <button type="button" (click)="cargarAdministrador()">ADMIN</button>
         <button type="button" (click)="registrarse()">REGISTRARSE</button>
         </div>
     </form>

@@ -50,4 +50,14 @@ export class LoginComponent implements OnInit {
     this.email = "lucashulej@gmail.com";
     this.pass = "123456";
   }
+
+  cargarPaciente() {
+    this.email = "Abruvillarreal@gmail.com";
+    this.pass = "123456";
+  }
+
+  cargarAdministrador() { 
+    this.email = "hulej.daniel@gmail.com";
+    this.pass = "123456";
+  }
 }

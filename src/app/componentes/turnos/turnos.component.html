@@ -1,0 +1,19 @@
+<div class="cnt-turnos">
+    <div class="cnt-turnos-titulo">
+        <input type="text" placeholder="filtrar por dia" (input)="cambioFiltro($event)">
+    </div>
+    <div class="cnt-turnos-titulo">
+        <span>PROXIMOS TURNOS DISPONIBLES</span>
+    </div>
+    <div  class="cnt-turnos-tabla">
+        <table>
+            <tbody>
+                <tr *ngFor="let turno of listaTurnos | diaDeLaFecha" (click)="seleccionarTurno(turno)">
+                    <td>{{turno.dia}}</td>
+                    <td>{{turno.fecha}}</td>
+                    <td>{{turno.horario}}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+</div>

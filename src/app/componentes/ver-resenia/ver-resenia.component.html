@@ -1,0 +1,21 @@
+<div class="cnt-resenia">
+    <h1>FICHA MEDICA</h1>
+    <span>FECHA = {{turno.fecha}}</span>
+    <span>HORA = {{turno.horario}}</span>
+    <span>PRESION = {{turno.presion}}</span>
+    <span>TEMPERATURA = {{turno.temperatura}}</span>
+    <span>EDAD = {{turno.edad}}</span>
+    <span *ngIf="turno.claveCampo1">{{turno.claveCampo1}} = {{turno.valorCampo1}}</span>
+    <span *ngIf="turno.claveCampo2">{{turno.claveCampo2}} = {{turno.valorCampo2}}</span>
+    <span *ngIf="turno.claveCampo3">{{turno.claveCampo3}} = {{turno.valorCampo3}}</span>
+
+    <h1 *ngIf="tipo == 'Profesional'">RESEÑA PROFESIONAL</h1>
+    <textarea *ngIf="tipo == 'Profesional' && turno.reseniaProfesional" name="mensaje" [(ngModel)]="turno.reseniaProfesional" disabled></textarea>
+    <span *ngIf="tipo == 'Profesional' && !turno.reseniaProfesional">No hay comentario del profesional</span>
+
+    <h1 *ngIf="tipo == 'Paciente'">RESEÑA PACIENTE</h1>
+    <textarea *ngIf="tipo == 'Paciente' && turno.reseniaPaciente" name="mensaje" [(ngModel)]="turno.reseniaPaciente" disabled></textarea>
+    <span *ngIf="tipo == 'Paciente' && !turno.reseniaPaciente">No hay comentario del paciente</span>
+
+    <button type="button" (click)="salir()">Cancelar</button>
+</div>

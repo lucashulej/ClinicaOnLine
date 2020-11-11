@@ -1,0 +1,17 @@
+<div class="cnt-profesionales">
+    <div class="cnt-profesionales-titulo">
+        <input type="text" placeholder="filtrar por apellido" (input)="cambioFiltro($event)">
+    </div>
+    <div class="cnt-profesionales-titulo">
+        <span>PROFESIONALES</span>
+    </div>
+    <div  class="cnt-profesionales-tabla">
+        <table>
+            <tbody>
+                <tr *ngFor="let profesional of listaProfesionales" (click)="seleccionarProfesional(profesional)">
+                    <td>{{profesional.apellido}}  {{profesional.nombre}}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="cnt-ver-turno">
+    <div class="cnt-ver-turno-secundario">
+        <div class="cnt-ver-turno-terciario">
+            <h1 class="titulo">PROFESIONAL</h1>
+            <div *ngIf="fotosProfesional" class="cnt-fotos">
+                <img [src]="fotosProfesional[0]">
+                <img [src]="fotosProfesional[1]">
+            </div>
+            <span><strong>Nombre</strong>  = {{profesional.nombre}}</span>
+            <span><strong>Apellido</strong>  = {{profesional.apellido}}</span>
+            <span><strong>Email</strong>  = {{profesional.email}}</span>
+            <span><strong>Especialidades</strong>  = {{profesional.especialidades}}</span>
+        </div>
+        <div class="cnt-ver-turno-terciario">
+            <h1 class="titulo">FICHA MEDICA</h1>
+            <span><strong>Fecha</strong> = {{turno.fecha}}</span>
+            <span><strong>Horario</strong>  = {{turno.horario}}</span>
+            <span><strong>Estado</strong>  = {{turno.estado}}</span>
+            <span *ngIf="turno.presion"><strong>Presion</strong>  = {{turno.presion}}</span>
+            <span *ngIf="turno.temperatura"><strong>Temperatura</strong>  = {{turno.temperatura}}</span>
+            <span *ngIf="turno.edad"><strong>Edad</strong>  = {{turno.edad}}</span>
+            <span *ngIf="turno.claveCampo1"><strong>{{turno.claveCampo1}}</strong> = {{turno.valorCampo1}}</span>
+            <span *ngIf="turno.claveCampo2"><strong>{{turno.claveCampo2}}</strong> = {{turno.valorCampo2}}</span>
+            <span *ngIf="turno.claveCampo3"><strong>{{turno.claveCampo3}}</strong> = {{turno.valorCampo3}}</span>
+        
+            <h1>RESEÑA PROFESIONAL</h1>
+            <textarea *ngIf="turno.reseniaProfesional" [(ngModel)]="turno.reseniaProfesional" disabled></textarea>
+            <span *ngIf="!turno.reseniaProfesional">No hay comentario del profesional</span>
+        
+            <h1>RESEÑA PACIENTE</h1>
+            <textarea *ngIf="turno.reseniaPaciente" name="mensaje" [(ngModel)]="turno.reseniaPaciente" disabled></textarea>
+            <span *ngIf="!turno.reseniaPaciente">No hay comentario del paciente</span>
+        </div>
+        <div class="cnt-ver-turno-terciario">
+            <h1 class="titulo">PACIENTE</h1>
+            <div *ngIf="fotosPaciente" class="cnt-fotos">
+                <img [src]="fotosPaciente[0]">
+                <img [src]="fotosPaciente[1]">
+            </div>
+            <span><strong>Nombre</strong>  = {{paciente.nombre}}</span>
+            <span><strong>Apellido</strong>  = {{paciente.apellido}}</span>
+            <span><strong>Email</strong>  = {{paciente.email}}</span>
+        </div>
+    </div>
+    <button type="button" (click)="salir()">Cancelar</button>
+</div>
