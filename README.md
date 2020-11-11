@@ -24,3 +24,21 @@ Hulej Lucas | https://www.linkedin.com/in/lucas-agustin-hulej-23a307151/ 💻
 Mostrales este proyectos a tus amigos, mi codigo es tu codigo 😜
 Invita una cerveza fria🍺
 Da las gracias públicamente 🤓
+
+# LOGIN
+![Login](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown.png)
+
+# REGISTRO PACIENTE
+![RegistroPaciente](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown2.png)
+
+# REGISTRO PROFESIONAL
+![RegistroProfesional](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/unknown1.png)
+
+# PACIENTE
+![Paciente](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/5.png)
+
+# PROFESIONAL
+![Profesional](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/4.png)
+
+# PERFIL
+![Perfil](https://github.com/lucashulej/ClinicaOnline/blob/main/src/assets/images/readme-images/6.png)
