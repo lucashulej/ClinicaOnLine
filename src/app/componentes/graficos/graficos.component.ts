@@ -18,8 +18,8 @@ export class GraficosComponent implements OnChanges {
     Highcharts.chart('graficos', this.grafico);
   }
 
-  descargarArchivo() {
-    this.descargar.emit("Descarga Exitosa");
+  descargarArchivo(modo:string) {
+    this.descargar.emit(modo);
   }
 
   salir() {

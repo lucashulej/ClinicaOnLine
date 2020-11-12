@@ -10,6 +10,9 @@ import { map } from 'rxjs/operators';
 })
 export class AuthGuard implements CanActivate {
 
+  usuarios: Observable<any[]>;
+  listaUsuarios: any[];
+
   constructor(private authService : AuthService, private routerService : RouterService) {}
   
   canActivate(): Observable<boolean> {

@@ -22,7 +22,6 @@ export class EncuestaPacienteComponent implements OnInit {
   }
 
   guardarEncuesta() {
-    alert(this.turno.reseniaPaciente);
     if(this.turno.reseniaPaciente != '' && this.turno.reseniaPaciente) {
       this.turnoConResenia.emit(this.turno);
     } else {

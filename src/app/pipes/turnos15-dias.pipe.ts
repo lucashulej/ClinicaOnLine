@@ -6,7 +6,16 @@ import { DatePipe } from '@angular/common';
 })
 export class Turnos15DiasPipe implements PipeTransform {
 
-  constructor(private datePipe : DatePipe) { }
+  hoy;
+
+  constructor(private datePipe : DatePipe) { 
+    let nuevaFecha = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+    let year = Number.parseInt(nuevaFecha[0] + nuevaFecha[1] + nuevaFecha[2] + nuevaFecha[3]);
+    let month = Number.parseInt(nuevaFecha[5] + nuevaFecha[6]);
+    month = month -1;
+    let day = Number.parseInt(nuevaFecha[8] + nuevaFecha[9]);
+    this.hoy = new Date(year, month, day, 0,0,0,0);
+  }
 
   dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
 
@@ -19,9 +28,10 @@ export class Turnos15DiasPipe implements PipeTransform {
         month = month -1;
         let day = Number.parseInt(turno.fecha[8] + turno.fecha[9]);
         let fechaTurno = new Date(year, month, day, 0,0,0,0)
-        let fechaHoy = new Date();
-        let diferenciaEnDias = ((fechaTurno.getTime() - fechaHoy.getTime()) / (1000 * 3600 * 24)); 
-        if(diferenciaEnDias >= -15 && diferenciaEnDias <= 14) {
+  
+        let diferenciaEnDias = Math.round(((this.hoy.getTime() - fechaTurno.getTime()) / (1000 * 3600 * 24)));
+
+        if(diferenciaEnDias >= -14 && diferenciaEnDias <= 14) {
           listaAux.push(turno);
         }
       }
