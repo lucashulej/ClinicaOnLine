@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { RouterService } from '../../servicios/router.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ToastrService } from 'ngx-toastr';
+import { IngresosService } from 'src/app/servicios/ingresos.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   email:string;
   pass:string;
 
-  constructor(private routerService : RouterService, private authService : AuthService, private usuarioSerive: UsuarioService, private toast: ToastrService) { }
+  constructor(private routerService : RouterService, private authService : AuthService, private usuarioSerive: UsuarioService, private toast: ToastrService, private ingresoService:IngresosService) { }
 
   ngOnInit(): void {}
 
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
           if(response.perfil == "Profesional") {
             if(response.habilitado) {
               this.routerService.navegar('/profesional');
+              this.ingresoService.nuevoIngreso(response.id);
             } else {
               this.toast.error("Solicite a un administrador que lo habilite");
             }

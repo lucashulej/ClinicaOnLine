@@ -24,6 +24,9 @@ export class AdministradorComponent implements OnInit {
   listaProfesionales: any[];
   listaPacientes: any[];
 
+  especialidades: Observable<any[]>;
+  listaEspecialidades: any[];
+
   constructor(private db : AngularFireDatabase, private authService : AuthService, private toast: ToastrService) { 
     this.usuarios = this.db.list('usuarios').valueChanges(); 
     this.usuarios.subscribe(usuarios => {
@@ -58,6 +61,9 @@ export class AdministradorComponent implements OnInit {
 
     this.turnos = this.db.list('turnos').valueChanges(); 
     this.turnos.subscribe(turnos => this.listaTurnos = turnos, error => console.log(error));
+
+    this.especialidades = this.db.list('especialidades').valueChanges(); 
+    this.especialidades.subscribe(especialidades => this.listaEspecialidades = especialidades, error => console.log(error));
   }
 
   ngOnInit(): void {}

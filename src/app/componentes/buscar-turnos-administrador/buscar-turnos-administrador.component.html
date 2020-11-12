@@ -18,6 +18,9 @@
                     <td class="main-td">EDAD</td>
                     <td class="main-td">TEMPERATURA</td>
                     <td class="main-td">PRESION</td>
+                    <td class="main-td">OPCIONAL 1</td>
+                    <td class="main-td">OPCIONAL 2</td>
+                    <td class="main-td">OPCIONAL 3</td>
                 </tr>
                 <tr *ngFor="let turno of listaTurnos | diaDeLaFecha" (click)="seleccionarTurno(turno)">
                     <td>{{turno.dia}}</td>
@@ -29,6 +32,12 @@
                     <td>{{turno.edad}}</td>
                     <td>{{turno.temperatura}}</td>
                     <td>{{turno.presion}}</td>
+                    <td *ngIf="turno.claveCampo1">{{turno.claveCampo1}} = {{turno.valorCampo1}}</td>
+                    <td *ngIf="!turno.claveCampo1"></td>
+                    <td *ngIf="turno.claveCampo2">{{turno.claveCampo2}} = {{turno.valorCampo2}}</td>
+                    <td *ngIf="!turno.claveCampo2"></td>
+                    <td *ngIf="turno.claveCampo3">{{turno.claveCampo3}} = {{turno.valorCampo3}}</td>
+                    <td *ngIf="!turno.claveCampo3"></td>
                 </tr>
             </tbody>
         </table> 

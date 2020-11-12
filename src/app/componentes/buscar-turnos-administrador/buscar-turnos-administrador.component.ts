@@ -15,9 +15,9 @@ export class BuscarTurnosAdministradorComponent implements OnInit {
   @Input() listaTurnos:any[] = [];
   @Input() listaProfesionales:any[] = [];
   @Input() listaPacientes:any[] = [];
+  @Output() cancelar: EventEmitter<any> = new EventEmitter();
 
   copiaDeLaLista:any[] = [];
-  @Output() cancelar: EventEmitter<any> = new EventEmitter();
   aux = false;
   dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
   mostrarTurno:boolean = false;
@@ -49,36 +49,60 @@ export class BuscarTurnosAdministradorComponent implements OnInit {
       } 
       
       if(turno.fecha.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       }
       
       if(turno.especialidad.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       }
       
 
       if(turno.estado.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       }
 
       if(turno.nombrePaciente.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       } 
       
       if(turno.nombreProfesional.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       }
       
       if(turno.edad?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       }
       
       if(turno.temperatura?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
       }
 
       if(turno.presion?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
-        return TurnosProfesionalComponent;
+        return turno;
+      }
+
+      if(turno.claveCampo1?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
+        return turno;
+      }
+
+      if(turno.valorCampo1?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
+        return turno;
+      }
+
+      if(turno.claveCampo2?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
+        return turno;
+      }
+
+      if(turno.valorCampo2?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
+        return turno;
+      }
+
+      if(turno.claveCampo3?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
+        return turno;
+      }
+
+      if(turno.valorCampo3?.toString().toLowerCase().includes(e.target.value.toLowerCase())) {
+        return turno;
       }
     });
     if(this.listaTurnos.length == 0) {

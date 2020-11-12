@@ -38,6 +38,8 @@ import { DatePipe } from '@angular/common';
 import { BuscarTurnosAdministradorComponent } from './componentes/buscar-turnos-administrador/buscar-turnos-administrador.component';
 import { Turnos15DiasPipe } from './pipes/turnos15-dias.pipe';
 import { VerTurnoComponent } from './componentes/ver-turno/ver-turno.component';
+import { InformesComponent } from './componentes/informes/informes.component';
+import { GraficosComponent } from './componentes/graficos/graficos.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyC3GjrUEl1qTbX0FG4Ztf1y7V1ouGnaBLQ",
@@ -77,6 +79,8 @@ var firebaseConfig = {
     BuscarTurnosAdministradorComponent,
     Turnos15DiasPipe,
     VerTurnoComponent,
+    InformesComponent,
+    GraficosComponent,
   ],
   imports: [
     BrowserModule,

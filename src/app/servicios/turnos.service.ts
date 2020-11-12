@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 import { Turno } from '../clases/turno';
 import { UsuarioService } from './usuario.service';
-import { Usuario } from '../clases/usuario';
 
 @Injectable({
   providedIn: 'root'
