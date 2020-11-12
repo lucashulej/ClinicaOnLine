@@ -1,9 +1,9 @@
 <div class="cnt-informes" *ngIf="!mostrarGrafico">
     <button type="button" class="btn-informes" (click)="informe('1a')">1 A</button>
     <button type="button" class="btn-informes" (click)="turnosPorEspecialidad()">Cantidad de operaciones por especialidad</button>
-    <button type="button" class="btn-informes" (click)="informe('2a')">2 A</button>
-    <button type="button" class="btn-informes" (click)="informe('2v')">2 B</button>
-    <button type="button" class="btn-informes" (click)="informe('2c')">2 C</button>
+    <button type="button" class="btn-informes" (click)="turnosPorDia()">Cantidad de turnos por dia de la semana</button>
+    <button type="button" class="btn-informes" (click)="turnosPorMedico()">Médicos por cantidad de turnos dados en un lapso de tiempo</button>
+    <button type="button" class="btn-informes" (click)="medicosPorDias()">Médicos por cantidad de días que trabajaron en un lapso de tiempo</button>
     <button type="button" class="btn-informes" (click)="salir()">Cancelar</button>
     <!--<div class="graficos" id="graficos"></div>-->
 </div>

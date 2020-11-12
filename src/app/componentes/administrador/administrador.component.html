@@ -17,6 +17,6 @@
         <app-buscar-turnos-administrador [listaTurnos]="listaTurnos" [listaProfesionales]="listaProfesionales" [listaPacientes]="listaPacientes" (cancelar)="agarrarCancelar()"></app-buscar-turnos-administrador>
     </div>
     <div *ngIf="vistaAdministrador == 'Informes'" class="cnt-secundario-administrador">
-        <app-informes [listaEspecialidades]="listaEspecialidades" [listaTurnos]="listaTurnos" (cancelar)="agarrarCancelar()"></app-informes>
+        <app-informes [listaIngresos]="listaIngresos" [listaProfesionales]="listaProfesionales" [listaEspecialidades]="listaEspecialidades" [listaTurnos]="listaTurnos" (descargar)="agarrarDescargar()" (cancelar)="agarrarCancelar()"></app-informes>
     </div>
 </div>

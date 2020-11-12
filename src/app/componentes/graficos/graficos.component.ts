@@ -10,7 +10,7 @@ export class GraficosComponent implements OnChanges {
 
   @Input() grafico;
   @Output() cancelar: EventEmitter<any> = new EventEmitter();
-  @Output() exito: EventEmitter<any> = new EventEmitter();
+  @Output() descargar: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -18,8 +18,8 @@ export class GraficosComponent implements OnChanges {
     Highcharts.chart('graficos', this.grafico);
   }
 
-  descargar() {
-    this.exito.emit("Descarga Exitosa");
+  descargarArchivo() {
+    this.descargar.emit("Descarga Exitosa");
   }
 
   salir() {

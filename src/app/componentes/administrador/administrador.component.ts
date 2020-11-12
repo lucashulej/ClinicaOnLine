@@ -27,6 +27,9 @@ export class AdministradorComponent implements OnInit {
   especialidades: Observable<any[]>;
   listaEspecialidades: any[];
 
+  ingresos: Observable<any[]>;
+  listaIngresos: any[];
+
   constructor(private db : AngularFireDatabase, private authService : AuthService, private toast: ToastrService) { 
     this.usuarios = this.db.list('usuarios').valueChanges(); 
     this.usuarios.subscribe(usuarios => {
@@ -64,6 +67,9 @@ export class AdministradorComponent implements OnInit {
 
     this.especialidades = this.db.list('especialidades').valueChanges(); 
     this.especialidades.subscribe(especialidades => this.listaEspecialidades = especialidades, error => console.log(error));
+
+    this.ingresos = this.db.list('ingresos').valueChanges(); 
+    this.ingresos.subscribe(ingresos => this.listaIngresos = ingresos, error => console.log(error));
   }
 
   ngOnInit(): void {}
@@ -82,5 +88,9 @@ export class AdministradorComponent implements OnInit {
 
   agarrarCancelar() {
     this.vistaAdministrador = "";
+  }
+
+  agarrarDescargar() {
+
   }
 }
